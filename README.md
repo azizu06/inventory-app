@@ -1,1 +1,1 @@
-Creating mini message board to practice express and ejs
+Creating inventory application to practice express and postgres
