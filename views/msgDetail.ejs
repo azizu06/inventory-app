@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Message Detail</title>
+  </head>
+  <body class="min-h-screen bg-slate-100 text-slate-900">
+    <main
+      class="mx-auto flex min-h-screen w-full max-w-3xl items-center px-4 py-8 sm:px-6 lg:px-8"
+    >
+      <section
+        class="w-full overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_20px_60px_-24px_rgba(15,23,42,0.28)]"
+      >
+        <div
+          class="border-b border-slate-200 bg-[linear-gradient(135deg,_#ffffff,_#f8fafc_58%,_#ecfeff)] px-5 py-6 sm:px-8"
+        >
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <p
+                class="text-sm font-medium uppercase tracking-[0.24em] text-cyan-600"
+              >
+                Message Detail
+              </p>
+              <h1
+                class="mt-2 text-3xl font-semibold tracking-tight text-slate-950"
+              >
+                Posted by <%= msg.username %>
+              </h1>
+            </div>
+
+            <a
+              href="/"
+              class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-3 text-slate-500 transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-950"
+              aria-label="Back to message board"
+            >
+              <i data-lucide="x" class="h-5 w-5"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="space-y-6 px-5 py-6 sm:px-8 sm:py-8">
+          <div class="flex items-start gap-4">
+            <div
+              class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-cyan-500 text-lg font-semibold text-white shadow-sm shadow-cyan-200"
+            >
+              <span><%= msg.username.charAt(0).toUpperCase() %></span>
+            </div>
+
+            <div class="space-y-2">
+              <p class="text-lg font-semibold tracking-tight text-slate-950">
+                <%= msg.username %>
+              </p>
+              <p class="text-sm text-slate-500">
+                <%= new Date(msg.added).toLocaleString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                  hour: "numeric",
+                  minute: "2-digit",
+                }) %>
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="rounded-3xl border border-slate-200 bg-slate-50 px-5 py-5 sm:px-6 sm:py-6"
+          >
+            <p class="text-base leading-8 text-slate-700 sm:text-lg">
+              <%= msg.text %>
+            </p>
+          </div>
+
+          <div class="flex justify-end">
+            <a
+              href="/"
+              class="inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:bg-slate-800"
+            >
+              <i data-lucide="arrow-left" class="h-4 w-4"></i>
+              Back to Board
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <%- include("lucide") %>
+  </body>
+</html>

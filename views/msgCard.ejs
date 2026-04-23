@@ -1,0 +1,43 @@
+<article
+  class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md sm:p-6"
+>
+  <div class="flex items-start justify-between gap-4">
+    <div class="flex items-start gap-4">
+      <div
+        class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-500 text-sm font-semibold text-white shadow-sm shadow-emerald-200"
+      >
+        <span><%= msg.username.charAt(0).toUpperCase() %></span>
+      </div>
+
+      <div class="space-y-3">
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <p class="text-base font-semibold tracking-tight text-slate-950">
+            <%= msg.username %>
+          </p>
+          <p class="text-sm text-slate-500">
+            <%= new Date(msg.added).toLocaleString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+              hour: "numeric",
+              minute: "2-digit",
+            }) %>
+          </p>
+        </div>
+
+        <p class="max-w-2xl text-sm leading-7 text-slate-700 sm:text-[15px]">
+          <%= msg.text %>
+        </p>
+      </div>
+    </div>
+
+    <a
+      href="/msgs/<%= msg.id %>"
+      class="inline-flex shrink-0 items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:bg-slate-100 hover:text-slate-950"
+      aria-label="Open message details"
+    >
+      <i data-lucide="eye" class="h-4 w-4"></i>
+      <span class="hidden sm:inline">Open</span>
+    </a>
+  </div>
+</article>

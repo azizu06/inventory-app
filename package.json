@@ -1,0 +1,42 @@
+{
+  "name": "message-board",
+  "version": "1.0.0",
+  "description": "Creating mini message board to practice express and ejs",
+  "main": "app.js",
+  "scripts": {
+    "start": "node routes/app.js",
+    "db:init": "node db/init.js",
+    "dev:server": "nodemon routes/app.js",
+    "build:css": "tailwindcss -i ./src/input.css -o ./public/styles.css",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./public/styles.css --watch",
+    "dev": "concurrently \"npm run dev:server\" \"npm run watch:css\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/azizu06/message-board.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/azizu06/message-board/issues"
+  },
+  "homepage": "https://github.com/azizu06/message-board#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.2",
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.10",
+    "tailwindcss": "^4.2.2"
+  },
+  "dependencies": {
+    "concurrently": "^9.2.1",
+    "dotenv": "^17.4.2",
+    "ejs": "^5.0.2",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.2",
+    "lucide-react": "^1.8.0",
+    "nodemon": "^3.1.14",
+    "pg": "^8.20.0"
+  }
+}
