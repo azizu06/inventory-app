@@ -32,7 +32,14 @@
               />
             </div>
           </div>
-          <p class="border-blue-400 rounded-xl p-3"><%= product.category %></p>
+          <select name="category" id="category" class="border-blue-400 rounded-xl p-3">
+            <% categories.forEach((cat) => { %>
+            <option value="<%= cat.name %>" <%= product.category === cat.name ? "selected" : "" %>>
+                <%= cat.name %>
+            </option>
+            <% }) %>
+          </select>
+          <p ><%= product.category %></p>
           <textarea name="desc" id="desc"><%= product.description %></textarea>
           <div class="flex gap-1">
             <label for="quantity">Quantity:</label>
