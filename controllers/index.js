@@ -47,6 +47,11 @@ const validateCategory = [
     .withMessage("Description must be a max of 500 characters."),
 ];
 
+exports.categoriesGet = async (req, res) => {
+  const categories = await db.getCategories();
+  res.render("categories", { categories });
+};
+
 exports.productsGet = async (req, res) => {
   const products = await db.getProducts(req.query);
   const categories = await db.getCategories();
