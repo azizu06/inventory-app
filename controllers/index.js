@@ -6,17 +6,45 @@ const {
   matchedData,
 } = require("express-validator");
 
-const validateMsgAdd = [
-  body("author")
+const validateProduct = [
+  body("name")
     .trim()
-    .escape()
-    .isLength({ min: 1, max: 10 })
-    .withMessage("Username must be between 1 and 10 characters."),
-  body("message")
+    .isLength({ min: 2, max: 200 })
+    .withMessage("Name must be between 2 and 200 characters."),
+  body("price")
+    .isFloat({ min: 0 })
+    .withMessage("Price must be a number greater or equal to 0."),
+  body("quantity")
+    .isInt({ min: 0 })
+    .withMessage("Quantity must be a number greater or equal to 0."),
+  body("brand")
+    .optional({ checkFalsy: true })
     .trim()
-    .escape()
-    .isLength({ min: 1, max: 200 })
-    .withMessage("Message must be between 1 and 200 characters."),
+    .isLength({ max: 200 })
+    .withMessage("Brand must be a max of 200 characters."),
+  body("description")
+    .optional({ checkFalsy: true })
+    .trim()
+    .isLength({ max: 500 })
+    .withMessage("Description must be a max of 500 characters."),
+  body("category").trim().notEmpty().withMessage("Category is required"),
+  body("image")
+    .optional({ checkFalsy: true })
+    .trim()
+    .isURL()
+    .withMessage("Image URL must be a valid URL."),
+];
+
+const validateCategory = [
+  body("name")
+    .trim()
+    .isLength({ min: 2, max: 200 })
+    .withMessage("Name must be between 2 and 200 characters."),
+  body("description")
+    .optional({ checkFalsy: true })
+    .trim()
+    .isLength({ max: 500 })
+    .withMessage("Description must be a max of 500 characters."),
 ];
 
 exports.getMsgs = async (req, res) => {
