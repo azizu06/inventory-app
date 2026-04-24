@@ -6,22 +6,22 @@ const initCategories = `
 
   CREATE TABLE categories (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY;
-    name TEXT,
+    name TEXT UNIQUE,
     description TEXT,
   )
   INSERT INTO categories (name, description)
   VALUES
 `;
 
-const initItems = `
-DROP TABLE IF EXISTS items;
+const initProducts = `
+DROP TABLE IF EXISTS products;
 
 CREATE TABLE items (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    name TEXT,
+    name TEXT UNIQUE,
     brand TEXT,
     price NUMERIC(10,2),
-    stock INTEGER,
+    quantity INTEGER,
     description TEXT,
     image_url TEXT,
     category_id INTEGER REFERENCES categories(id)
@@ -39,7 +39,7 @@ const main = async () => {
   });
   await client.connect();
   await client.query(initCategories);
-  await client.query(initItems);
+  await client.query(initProducts);
   await client.end();
 };
 main();
