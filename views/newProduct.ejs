@@ -1,36 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
     <title>Add Product</title>
-</head>
-<body>
+  </head>
+  <body>
     <%- include("navbar.ejs") %>
-     <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-4">
       <h1>Add a Product</h1>
       <form action="/products/new" method="post" class="flex flex-col gap-2">
         <label for="name">Name:</label>
         <input type="text" name="name" id="name" required />
         <label for="price">Price:</label>
-        <input type="number" name="price" id="price" required></input>
+        <input type="number" name="price" id="price" required />
         <label for="quantity">Quantity:</label>
         <input type="number" name="quantity" id="quantity" required />
         <label for="brand">Brand:</label>
-        <input type="text" name="brand" id="brand"></input>
+        <input type="text" name="brand" id="brand" />
         <label for="desc">Description:</label>
         <textarea name="desc" id="desc"></textarea>
         <label for="category">Category:</label>
         <select name="category" id="category" required>
-            <% categories.forEach((cat) => { %>
-                <option value="<%= cat.name %>"><%= cat.name %></option>
-            <% }) %>
+          <% categories.forEach((cat) => { %>
+          <option value="<%= cat.name %>"><%= cat.name %></option>
+          <% }) %>
         </select>
         <label for="image">Image URL:</label>
-        <input type="text" name="image" id="image"></input>
-        <button type="submit" class="flex w-full p-2 justify-center">Submit</button>
+        <input type="text" name="image" id="image" />
+        <div class="flex justify-between w-full">
+          <a href="/products" class="flex p-2 justify-center border rounded-lg"
+            >Return to Products</a
+          >
+          <button
+            type="submit"
+            class="flex p-2 justify-center border rounded-lg"
+          >
+            Submit
+          </button>
+        </div>
       </form>
     </div>
-</body>
+  </body>
 </html>
