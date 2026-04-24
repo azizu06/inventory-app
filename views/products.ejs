@@ -7,13 +7,14 @@
     <title>Products</title>
   </head>
   <body>
+    <%- include("navbar.ejs") %>
     <div class="flex flex-col gap-6">
       <div class="flex gap-2">
         <h1>Products</h1>
         <a href="/products/new" class="border rounded-lg p-2">Add a Product</a>
       </div>
       <div class="flex">
-        <form method="GET" action="/products" class="flex flex-col gap-3 w-sm">
+        <form method="get" action="/products" class="flex flex-col gap-3 w-sm">
           <div class="flex flex-col gap-1">
             <h3>Sort by Price:</h3>
             <label>

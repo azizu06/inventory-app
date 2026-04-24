@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title><%= product.name %>></title>
+  </head>
+  <body>
+    <%- include("navbar.ejs") %>
+    <div class="flex flex-col gap-4">
+      <a href="/products/<%= product.id %>" class="border rounded-lg p-2"
+        >Return to
+        <%= product.name %></a
+      >
+      <div class="flex gap-4 border rounded-xl">
+        <img src="<%= product.image_url %>" />
+        <form
+          method="post"
+          action="/products/<%= product.id %>/update"
+          class="flex flex-col gap-2"
+        >
+          <div class="flex justify-between">
+            <p><%= product.name %></p>
+            <div class="flex gap-1">
+              <label for="cost">$</label>
+              <input
+                type="text"
+                name="cost"
+                id="cost"
+                value="<%= product.price %>"
+              />
+            </div>
+          </div>
+          <p class="border-blue-400 rounded-xl p-3"><%= product.category %></p>
+          <textarea name="desc" id="desc"><%= product.description %></textarea>
+          <div class="flex gap-1">
+            <label for="quantity">Quantity:</label>
+            <input
+              type="number"
+              name="quantity"
+              id="quantity"
+              value="<%= product.quantity %>"
+            />
+          </div>
+          <button class="w-full flex justify-center border rounded-lg p-2">
+            Submit Edits
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
