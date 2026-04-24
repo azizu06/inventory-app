@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Products</title>
+  </head>
+  <body>
+    <div class="flex flex-col gap-6">
+      <div class="flex gap-2">
+        <h1>Products</h1>
+        <a href="/products/new" class="border rounded-lg p-2">Add a Product</a>
+      </div>
+      <div class="flex">
+        <form method="GET" action="/products" class="flex flex-col gap-3 w-sm">
+          <div class="flex flex-col gap-1">
+            <h3>Sort by Price:</h3>
+            <label>
+              <input
+                type="radio"
+                name="sort"
+                value="priceAsc"
+              />Ascending</label
+            >
+            <label>
+              <input
+                type="radio"
+                name="sort"
+                value="priceDesc"
+              />Descending</label
+            >
+          </div>
+          <div class="flex flex-col gap-1">
+            <h3>Sort by Name:</h3>
+            <label>
+              <input type="radio" name="sort" value="nameAsc" />Ascending</label
+            >
+            <label>
+              <input
+                type="radio"
+                name="sort"
+                value="nameDesc"
+              />Descending</label
+            >
+          </div>
+          <div class="flex flex-col gap-1">
+            <h3>Filter by Category:</h3>
+            <% categories.forEach((cat) => { %>
+            <label>
+              <input
+                type="checkbox"
+                name="category[]"
+                value="<%= cat.name %>"
+              />
+              <%= cat.name %>
+            </label>
+            <% }) %>
+          </div>
+          <button type="submit" class="boreder rounded-full p-2">
+            Apply Filters
+          </button>
+        </form>
+        <div class="flex flex-wrap gap-3 w-xl"></div>
+      </div>
+    </div>
+  </body>
+</html>

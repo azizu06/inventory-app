@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+</head>
+<body>
+    <div class="flex flex-col gap-4">
+        <div class="flex gap-2">
+            <h1>Categories</h1>
+            <a href="/categories/new" class="border rounded-lg p-2">Add a category</a>
+        </div>
+        <div class="flex flex-wrap max-w-lg gap-3">
+            <% categories.forEach((cat) => { %>
+                <div class="flex flex-col gap-2">
+                    <h2 class="justify-center"><%= cat.name %></h2>
+                    <p><%= cat.description %></p>
+                </div>
+            <% }) %>    
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stlyes.css" />
+    <title>Home</title>
+  </head>
+  <body>
+    <%- include("navbar.ejs") %>
+    <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-3">
+        <h1>Welcome</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam a
+          itaque repellendus praesentium ea soluta fugiat voluptates libero
+          aliquam harum quisquam molestiae blanditiis nam unde, quam magnam eius
+          saepe odio?
+        </p>
+      </div>
+      <div class="flex flex-col gap-3">
+        <a href="/products" class="border rounded-full p-2">View Products</a>
+        <a href="/categories" class="border rounded-full p-2"
+          >View Categories</a
+        >
+      </div>
+    </div>
+  </body>
+</html>
