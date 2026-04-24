@@ -61,7 +61,27 @@
             Apply Filters
           </button>
         </form>
-        <div class="flex flex-wrap gap-3 w-xl"></div>
+        <div class="flex flex-wrap gap-3 w-xl border p-5">
+          <% products.forEach((p) => { %>
+          <a class="flex flex-col gap-1 p-1" href="/products/<%= p.id %>">
+            <div class="flex flex-col flex-1 gap-1">
+              <img src="<%= p.image_url %>" />
+              <div class="flex justify-between">
+                <p><%= p.name %></p>
+                <p>$<%= p.price %></p>
+              </div>
+              <div class="flex flex-col gap-1">
+                <p>
+                  Brand:
+                  <%= p.brand %>
+                </p>
+                <p>Quantity: <%= p.quantity %></p>
+              </div>
+            </div>
+            <p><%= p.category %></p>
+          </a>
+          <% }) %>
+        </div>
       </div>
     </div>
   </body>
