@@ -1,5 +1,10 @@
 const pool = require("./pool");
 
+exports.getCategories = async () => {
+  const { rows } = await pool.query(`SELECT * FROM categories`);
+  return rows;
+};
+
 exports.getProducts = async (filters) => {
   const { search, categories, name, price } = filters;
   let sql = `
@@ -119,4 +124,15 @@ exports.deleteCategory = async (id) => {
     [id],
   );
   return rows[0];
+};
+
+exports.findProduct = async (id) => {
+  const { rows } = await pool.query(
+    `SELECT p.*, c.name as category
+    FROM products p
+    JOIN categories c ON p.category_id = c.id
+    WHERE p.id = $1`,
+    [id],
+  );
+  return rows;
 };

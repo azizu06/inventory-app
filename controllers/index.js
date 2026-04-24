@@ -47,33 +47,84 @@ const validateCategory = [
     .withMessage("Description must be a max of 500 characters."),
 ];
 
-exports.getMsgs = async (req, res) => {
-  const messages = await db.getAll();
-  res.render("index", { messages });
+exports.productsGet = async (req, res) => {
+  const products = await db.getProducts(req.query);
+  const categories = await db.getCategories();
+  res.render("products", { categories, products });
 };
 
-exports.createMsgGet = (req, res) => {
-  res.render("form", { errors: [], values: {} });
+exports.createProductsGet = async (req, res) => {
+  const categories = await db.getCategories();
+  res.render("newProduct", { categories, values: req.body });
 };
 
-exports.createMsgPost = [
-  validateMsgAdd,
+exports.createProductPost = [
+  validateProduct,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res
         .status(404)
-        .render("form", { errors: errors.array(), values: req.body });
+        .render("newProduct", { errors: errors.array(), values: req.body });
     }
-    const { author, message } = matchedData(req);
-    await db.insertMsg(message, author);
-    res.redirect("/");
+    await db.addProduct(req.body);
+    res.redirect("/products");
   },
 ];
 
-exports.getMsgDetail = async (req, res) => {
-  const id = Number(req.params.id);
-  const msg = await db.findMsg(id);
-  if (!msg) return res.status(404).send("Message not found");
-  res.render("msgDetail", { msg });
+exports.createCategoryGet = async (req, res) => {
+  res.render("newCategory");
+};
+
+exports.createCategoryPost = [
+  validateCategory,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res
+        .status(404)
+        .render("newProduct", { errors: errors.array(), values: req.body });
+    }
+    await db.addCategory(req.body);
+    res.redirect("/categories");
+  },
+];
+
+exports.editProductGet = async (req, res) => {
+  const { id } = req.query;
+  const product = await db.findProduct(Number(id));
+  const categories = await db.getCategories();
+  res.render("productEdit", { categories, product });
+};
+
+exports.editProductPost = [
+  validateProduct,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res
+        .status(404)
+        .render("productEdit", { errors: errors.array(), values: req.body });
+    }
+    await db.editProduct(req.body);
+    res.redirect("/products");
+  },
+];
+
+exports.viewProductGet = async (res, res) => {
+  const { id } = req.query;
+  const product = await db.findProduct(Number(id));
+  res.render("productDetail", { product });
+};
+
+exports.deleteProductPost = async (req, res) => {
+  const { id } = req.query;
+  await db.deleteProduct(Number(id));
+  res.redirect("/products");
+};
+
+exports.deleteCategoryPost = async (req, res) => {
+  const { id } = req.query;
+  await db.deleteCategory(Number(id));
+  res.redirect("/categories");
 };

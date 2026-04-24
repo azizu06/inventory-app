@@ -1,0 +1,13 @@
+<% if(errors?.length){ %>
+<div class="flex flex-col gap-2">
+  <p>Submission Error</p>
+  <div class="flex flex-col">
+    <p>Fix the following issues before submitting.</p>
+    <ul>
+      <% errors.forEach(e) => { %>
+      <p><%= e.msg %></p>
+      <% } %>
+    </ul>
+  </div>
+</div>
+<% } %>
