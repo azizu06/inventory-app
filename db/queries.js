@@ -104,3 +104,19 @@ exports.editProduct = async (product, id) => {
   const { rows } = await pool.query(sql, values);
   return rows[0];
 };
+
+exports.deleteProduct = async (id) => {
+  const { rows } = await pool.query(
+    `DELETE FROM products WHERE id = $1 RETURNING *`,
+    [id],
+  );
+  return rows[0];
+};
+
+exports.deleteCategory = async (id) => {
+  const { rows } = await pool.query(
+    `DELETE FROM categories WHERE id = $1 RETURNING *`,
+    [id],
+  );
+  return rows[0];
+};

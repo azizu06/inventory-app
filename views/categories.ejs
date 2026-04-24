@@ -16,15 +16,27 @@
         >
       </div>
       <div class="flex flex-wrap max-w-lg gap-3">
-        <% categories.forEach((cat) => { %>
+        <% categories.forEach((cat) => %>
         <a
-          class="flex flex-col gap-2"
+          class="flex flex-col gap-2 justify-center"
           href="/products?category=<%= cat.name %>"
         >
           <h2 class="justify-center"><%= cat.name %></h2>
           <p><%= cat.description %></p>
+          <form
+            action="/categories/<%= cat.id %>/delete"
+            method="post"
+            class="flex w-full justify-center"
+          >
+            <button
+              type="submit"
+              class="flex justify-center p-2 border rounded-lg"
+            >
+              Delete
+            </button>
+          </form>
         </a>
-        <% }) %>
+        <% ) %>
       </div>
     </div>
   </body>
