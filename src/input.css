@@ -315,6 +315,12 @@ h1 {
   font-size: clamp(2.6rem, 6vw, 5.4rem);
 }
 
+.form-intro h1 {
+  max-width: 11ch;
+  font-size: clamp(3.1rem, 7vw, 5.1rem);
+  line-height: 0.98;
+}
+
 .hero-text,
 .page-heading p,
 .form-intro p,
@@ -555,6 +561,11 @@ h1 {
 
 .page-heading p {
   margin-top: 1rem;
+}
+
+.form-intro h1 + p,
+.detail-panel h1 + .detail-price {
+  margin-top: 1.35rem;
 }
 
 .catalog-layout {
@@ -969,6 +980,13 @@ h1 {
 .form-intro {
   position: sticky;
   top: 7rem;
+  display: grid;
+  align-content: start;
+  gap: 1.15rem;
+}
+
+.form-intro .eyebrow {
+  margin-bottom: 0;
 }
 
 .form-card {
