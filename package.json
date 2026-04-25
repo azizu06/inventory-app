@@ -1,5 +1,5 @@
 {
-  "name": "message-board",
+  "name": "inventory-app",
   "version": "1.0.0",
   "description": "Creating mini message board to practice express and ejs",
   "main": "app.js",
