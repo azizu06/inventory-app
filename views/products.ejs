@@ -40,6 +40,21 @@
               <a href="/products">Reset</a>
             </div>
 
+            <div class="filter-search-field">
+              <label for="search">Search catalog</label>
+              <div class="filter-search-control">
+                <i data-lucide="search" aria-hidden="true"></i>
+                <% const catalogSearchValue = filter.search || ""; %>
+                <input
+                  id="search"
+                  type="text"
+                  name="search"
+                  placeholder="Product name"
+                  value="<%= catalogSearchValue %>"
+                />
+              </div>
+            </div>
+
             <fieldset class="option-group">
               <legend>Price order</legend>
               <label class="choice-chip">

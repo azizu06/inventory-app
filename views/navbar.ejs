@@ -13,20 +13,6 @@
       <a href="/products">Products</a>
       <a href="/categories">Categories</a>
     </div>
-
-    <form method="get" action="/products" class="nav-search" role="search">
-      <label class="sr-only" for="global-search">Search products</label>
-      <i data-lucide="search" aria-hidden="true"></i>
-      <% const globalSearchValue = typeof filter !== "undefined" ? filter.search || "" : ""; %>
-      <input
-        id="global-search"
-        type="text"
-        name="search"
-        placeholder="Search the catalog"
-        value="<%= globalSearchValue %>"
-      />
-      <button type="submit">Search</button>
-    </form>
   </nav>
   <%- include("lucide.ejs") %>
 </header>
