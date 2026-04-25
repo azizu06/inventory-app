@@ -78,7 +78,7 @@ exports.categoriesGet = async (req, res) => {
 };
 
 exports.createCategoryGet = async (req, res) => {
-  res.render("newCategory");
+  res.render("newCategory", { category: {} });
 };
 
 exports.createCategoryPost = [
@@ -88,7 +88,7 @@ exports.createCategoryPost = [
     if (!errors.isEmpty()) {
       return res
         .status(404)
-        .render("newProduct", { errors: errors.array(), category: req.body });
+        .render("newCategory", { errors: errors.array(), category: req.body });
     }
     await db.addCategory(req.body);
     res.redirect("/categories");
@@ -99,7 +99,7 @@ exports.editProductGet = async (req, res) => {
   const { id } = req.params;
   const product = await db.findProduct(Number(id));
   const categories = await db.getCategories();
-  res.render("productEdit", { categories, product });
+  res.render("productEdit", { categories, product, values: product });
 };
 
 exports.editProductPost = [
@@ -107,11 +107,19 @@ exports.editProductPost = [
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res
-        .status(404)
-        .render("productEdit", { errors: errors.array(), product: req.body });
+      const { id } = req.params;
+      const categories = await db.getCategories();
+      const product = await db.findProduct(Number(id));
+
+      return res.status(404).render("productEdit", {
+        errors: errors.array(),
+        product,
+        values: req.body,
+        categories,
+      });
     }
-    await db.editProduct(req.body);
+    const { id } = req.params;
+    await db.editProduct(req.body, id);
     res.redirect("/products");
   },
 ];

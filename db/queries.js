@@ -82,28 +82,16 @@ exports.addCategory = async (category) => {
 };
 
 exports.editProduct = async (product, id) => {
-  const { name, price, quantity, brand, description, category_id, image_url } =
-    product;
-  const values = [
-    name,
-    brand,
-    price,
-    quantity,
-    description,
-    image_url,
-    category_id,
-    id,
-  ];
+  const { price, quantity, brand, description, category_id } = product;
+  const values = [brand, price, quantity, description, category_id, id];
   const sql = `
     UPDATE products
-    SET name = $1,
-        brand = $2,
-        price = $3,
-        quantity $4,
-        description = $5,
-        image_url = $6,
-        category_id = $7
-    WHERE id = $8
+    SET brand = $1,
+        price = $2,
+        quantity = $3,
+        description = $4,
+        category_id = $5
+    WHERE id = $6
     RETURNING *
   `;
   const { rows } = await pool.query(sql, values);

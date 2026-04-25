@@ -29,7 +29,7 @@
                 type="number"
                 name="price"
                 id="price"
-                value="<%= product.price %>"
+                value="<%= values.price %>"
               />
             </div>
           </div>
@@ -39,7 +39,7 @@
             class="border-blue-400 rounded-xl p-3"
           >
             <% categories.forEach((cat) => { %>
-            <% if(product.category === cat.name){ %>
+            <% if(Number(values.category_id) === cat.id){ %>
             <option value="<%= cat.id %>" selected>
               <%= cat.name %>
             </option>
@@ -53,10 +53,10 @@
             type="text"
             name="brand"
             id="brand"
-            value="<%= product.brand %>"
+            value="<%= values.brand %>"
           />
           <textarea name="description" id="description">
-<%= product.description %></textarea
+<%= values.description %></textarea
           >
           <div class="flex gap-1">
             <label for="quantity">Quantity:</label>
@@ -64,7 +64,7 @@
               type="number"
               name="quantity"
               id="quantity"
-              value="<%= product.quantity %>"
+              value="<%= values.quantity %>"
             />
           </div>
           <button class="w-full flex justify-center border rounded-lg p-2">
