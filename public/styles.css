@@ -194,6 +194,7 @@
   --radius-lg: 28px;
   --radius-md: 20px;
   --radius-sm: 14px;
+  --nav-segment-width: 20rem;
   --ease: cubic-bezier(0.32, 0.72, 0, 1);
   color-scheme: dark;
 }
@@ -292,7 +293,7 @@ svg {
 }
 .nav-shell {
   display: grid;
-  grid-template-columns: auto 1fr minmax(18rem, 28rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
   align-items: center;
   width: min(1180px, calc(100vw - 2rem));
@@ -311,10 +312,17 @@ svg {
   display: inline-flex;
   gap: 0.65rem;
   align-items: center;
+  justify-content: flex-start;
+  justify-self: start;
+  width: min(var(--nav-segment-width), 100%);
+  min-height: 3.05rem;
   padding: 0.35rem 0.9rem 0.35rem 0.35rem;
   font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: -0.01em;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  border-radius: 999px;
 }
 .brand-orb {
   display: grid;
@@ -336,6 +344,9 @@ svg {
   display: inline-flex;
   gap: 0.3rem;
   justify-self: center;
+  justify-content: center;
+  width: min(var(--nav-segment-width), 100%);
+  min-height: 3.05rem;
   padding: 0.25rem;
   color: var(--muted-strong);
   background: rgba(255, 255, 255, 0.035);
@@ -356,6 +367,9 @@ svg {
   grid-template-columns: auto 1fr auto;
   gap: 0.55rem;
   align-items: center;
+  justify-self: end;
+  width: min(var(--nav-segment-width), 100%);
+  min-height: 3.05rem;
   padding: 0.35rem 0.4rem 0.35rem 0.85rem;
   color: var(--muted);
   background: rgba(255, 255, 255, 0.055);
