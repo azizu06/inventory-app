@@ -55,14 +55,14 @@ exports.products = [
     category: "Laptops",
   },
   {
-    name: "XPS 13 Laptop",
-    brand: "Dell",
-    price: 949.99,
+    name: "MacBook Air 15-inch with M5",
+    brand: "Apple",
+    price: 1299.0,
     quantity: 14,
     description:
-      "Dell's lightweight XPS 13 laptop designed for premium Windows productivity in a compact body.",
+      "Apple's larger MacBook Air with the M5 chip, Liquid Retina display, and a thin fanless aluminum design.",
     image_url:
-      "https://upload.wikimedia.org/wikipedia/commons/6/62/Dell_XPS_13_9350.jpg",
+      "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mba15-m4-starlight-gallery1-202503?wid=1200&hei=1200&fmt=jpeg&qlt=90&.v=1740618585861",
     category: "Laptops",
   },
   {
@@ -73,7 +73,7 @@ exports.products = [
     description:
       "A 14-inch OLED ultraportable laptop with a premium display and modern productivity hardware.",
     image_url:
-      "https://dlcdnwebimgs.asus.com/gain/c51ada83-5485-481c-ae66-dad209f27b93/",
+      "https://press.asus.com/assets/w_1555,h_1555/db774f50-1898-471f-9b91-43810157efd4/Zenbook%2014%20OLED_UX3405MA_Product%20photo_3B_Ponder%20Blue_04.PNG",
     category: "Laptops",
   },
   {
@@ -84,7 +84,7 @@ exports.products = [
     description:
       "Microsoft's Surface Laptop with a high-resolution touchscreen and Copilot+ PC features.",
     image_url:
-      "https://upload.wikimedia.org/wikipedia/commons/3/3a/Microsoft_Surface_Laptop_7.jpg",
+      "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/13-8-laptop-color-center-render-fy25%3AVP5-1596x1080?fmt=png-alpha",
     category: "Laptops",
   },
   {
@@ -132,14 +132,14 @@ exports.products = [
     category: "Smartphones",
   },
   {
-    name: "Pixel 10 Pro",
-    brand: "Google",
-    price: 999.0,
+    name: "Galaxy Z Flip7",
+    brand: "Samsung",
+    price: 1099.99,
     quantity: 17,
     description:
-      "Google's Pixel 10 Pro with Gemini-powered software features and a pro-grade Pixel camera system.",
+      "Samsung's pocket-sized AI foldable phone with an expanded cover screen and slimmer durable design.",
     image_url:
-      "https://lh3.googleusercontent.com/cUnl8qDLSpzTlH9_9fIEpNHq8EiVH-JwF-r0FPGha83zS26d0FO4LYUxYDU-k3CO6VDt9pyMOHWXiSvvFcenGccNM5B1L8TVO-2OtA=w1000-rj-sc0xffffffff",
+      "https://images.samsung.com/is/image/samsung/assets/us/smartphones/galaxy-z-flip7/galaxy-z-flip7-features-kv-mo.jpg",
     category: "Smartphones",
   },
   {
@@ -150,7 +150,7 @@ exports.products = [
     description:
       "Sony over-ear noise canceling headphones with premium sound, adaptive noise cancellation, and long battery life.",
     image_url:
-      "https://d1ncau8tqf99kp.cloudfront.net/converted/152005_original_local_1200x1050_v3_converted.webp",
+      "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6620/6620467_sd.jpg",
     category: "Audio",
   },
   {
@@ -161,7 +161,7 @@ exports.products = [
     description:
       "Sony true wireless earbuds with adaptive noise cancellation and studio-level sound tuning.",
     image_url:
-      "https://d1ncau8tqf99kp.cloudfront.net/converted/152005_original_local_1200x1050_v3_converted.webp",
+      "https://sony.scene7.com/is/image/sonyglobalsolutions/WF-1000XM6(E6)_black?$S7Product$&fmt=png-alpha",
     category: "Audio",
   },
   {
@@ -176,14 +176,14 @@ exports.products = [
     category: "Audio",
   },
   {
-    name: "Era 300",
-    brand: "Sonos",
-    price: 479.0,
+    name: "HomePod mini",
+    brand: "Apple",
+    price: 99.0,
     quantity: 13,
     description:
-      "Sonos spatial audio speaker with Dolby Atmos support, WiFi, Bluetooth, and room-filling sound.",
+      "Apple's compact smart speaker with room-filling 360-degree audio and Siri smart home control.",
     image_url:
-      "https://media.sonos.com/images/znqtjj88/production/1dfecdf1513cd96cd28e789adac4957b97adf50b-1800x1800.png?q=75&fit=clip&auto=format",
+      "https://www.apple.com/v/homepod-mini/j/images/meta/homepod-mini__bnxwvz5xrtpy_og.png?202604021101",
     category: "Audio",
   },
   {
@@ -194,7 +194,7 @@ exports.products = [
     description:
       "Bose premium noise canceling headphones with immersive audio and refined comfort for long listening sessions.",
     image_url:
-      "https://assets.bosecreative.com/transform/dbd0f72b-d68f-4bef-9d38-88132ffa0048/QCUHII26-BoseBlack_SF_PDP_E-Comm_Gallery_1_1500x1120?format=avif&quality=95",
+      "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6642/6642778_sd.jpg",
     category: "Audio",
   },
   {
@@ -216,7 +216,7 @@ exports.products = [
     description:
       "Full-size mechanical gaming keyboard with Chroma RGB, command dial, and dedicated macro keys.",
     image_url:
-      "https://assets3.razerzone.com/7B3Td61IWVw-IHVjUxTKjHAlQYI=/1500x1000/https%3A%2F%2Fmedias-p1.phoenix.razer.com%2Fsys-master-phoenix-images-container%2Fhe7%2Fh76%2F9815507599390%2Fbw-v4-pro-75-500x500.png",
+      "https://assets3.razerzone.com/AUWIVDU7eDOhKDVaq96BrtYZLKA=/1500x1000/https%3A%2F%2Fmedias-p1.phoenix.razer.com%2Fsys-master-phoenix-images-container%2Fh74%2Fh37%2F9477488148510%2F230216-bw-v4-pro-1500x1000-1.jpg",
     category: "Gaming Peripherals",
   },
   {
@@ -238,7 +238,7 @@ exports.products = [
     description:
       "Low-profile LIGHTSPEED wireless gaming keyboard with RGB lighting and a slim mechanical build.",
     image_url:
-      "https://resource.logitechg.com/w_1200,c_limit,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g915-x-lightspeed/gallery/g915-x-lightspeed-gallery-1-black.png",
+      "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6595/6595193_sd.jpg",
     category: "Gaming Peripherals",
   },
   {
@@ -249,7 +249,7 @@ exports.products = [
     description:
       "Wireless gaming headset with graphene drivers, LIGHTSPEED wireless, Bluetooth, and pro-grade audio tuning.",
     image_url:
-      "https://resource.logitechg.com/w_1200,c_limit,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-x-2-lightspeed/gallery/pro-x-2-lightspeed-gallery-1-black.png",
+      "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6544/6544740_sd.jpg",
     category: "Gaming Peripherals",
   },
   {
@@ -264,36 +264,36 @@ exports.products = [
     category: "Displays",
   },
   {
-    name: "49-inch Odyssey OLED G9 G91SD",
-    brand: "Samsung",
-    price: 1299.99,
+    name: "UltraSharp 32 6K Monitor U3224KB",
+    brand: "Dell",
+    price: 2299.99,
     quantity: 7,
     description:
-      "Samsung 49-inch curved OLED gaming monitor with Dual QHD resolution, 144Hz refresh rate, and 0.03ms response time.",
+      "Dell 32-inch 6K professional monitor with IPS Black panel, Thunderbolt 4 connectivity, and an integrated 4K webcam.",
     image_url:
-      "https://image-us.samsung.com/SamsungUS/home/computing/monitors/oled/11042024/G91SDBadge.jpg",
+      "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6602/6602114_sd.jpg",
     category: "Displays",
   },
   {
-    name: "ProArt Display PA279CRV",
-    brand: "ASUS",
-    price: 469.0,
+    name: "UltraSharp 27 Monitor U2724D",
+    brand: "Dell",
+    price: 319.99,
     quantity: 10,
     description:
-      "ASUS 27-inch 4K professional monitor with wide color coverage, USB-C power delivery, and factory calibration.",
+      "Dell 27-inch productivity monitor with IPS Black technology, QHD resolution, and a clean professional design.",
     image_url:
-      "https://dlcdnwebimgs.asus.com/files/media/96710c2a-7b6c-4994-a06a-47a4004df9c6/v2/img/kv.jpg",
+      "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6570/6570197_sd.jpg",
     category: "Displays",
   },
   {
-    name: "UltraGear OLED 27GS95QE",
-    brand: "LG",
-    price: 799.99,
+    name: "Studio Display XDR",
+    brand: "Apple",
+    price: 3299.0,
     quantity: 6,
     description:
-      "LG 27-inch OLED gaming monitor built for high refresh rate play with fast response and strong contrast.",
+      "Apple's 27-inch 5K Retina XDR display with mini-LED brightness, pro color workflows, and 120Hz refresh rate.",
     image_url:
-      "https://media.us.lg.com/m/52ac095bcf3b71c0/webimage-2025_IT_BMSM_UG_OLED_Monitors_MiniCard_768x432.png",
+      "https://www.apple.com/v/studio-display-xdr/b/images/meta/studio_display_xdr__dvvwjvcv36uu_og.png?202604071112",
     category: "Displays",
   },
   {
@@ -303,51 +303,52 @@ exports.products = [
     quantity: 9,
     description:
       "Dell 27-inch 4K productivity monitor with Thunderbolt hub connectivity and an UltraSharp panel.",
-    image_url: "https://placehold.co/1000x750/png?text=Dell+UltraSharp+U2725QE",
+    image_url:
+      "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/1031/10311311_sd.jpg",
     category: "Displays",
   },
   {
-    name: "Philips Hue Play HDMI Sync Box 8K",
-    brand: "Philips Hue",
-    price: 384.99,
+    name: "Echo Show 8 3rd Gen",
+    brand: "Amazon",
+    price: 149.99,
     quantity: 11,
     description:
-      "HDMI 2.1 smart lighting sync box that matches Hue lights to TV, movie, and gaming content up to 8K 60Hz.",
+      "Amazon's 8-inch Alexa smart display with spatial audio, built-in smart home hub, and video calling camera.",
     image_url:
-      "https://www.assets.signify.com/is/image/Signify/046677579753-929003499602-Philips-Hue-Sync-Box-gen-2-NAM-RTP",
+      "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6562/6562249_sd.jpg",
     category: "Smart Home",
   },
   {
-    name: "Hue Bridge Pro",
-    brand: "Philips Hue",
-    price: 98.99,
+    name: "Ring Battery Doorbell Pro",
+    brand: "Ring",
+    price: 229.99,
     quantity: 20,
     description:
-      "Philips Hue smart lighting hub for controlling and automating Hue lights across a connected home.",
+      "Ring's premium battery-powered video doorbell with Head-to-Toe HD+ video, 3D motion detection, and night vision.",
     image_url:
-      "https://www.assets.signify.com/is/image/Signify/046677585181-929003745501-Philips-Hue-Bridge-Pro-NAM-RTP",
+      "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6572/6572256_sd.jpg",
     category: "Smart Home",
   },
   {
-    name: "Nest Learning Thermostat 4th Gen",
-    brand: "Google Nest",
-    price: 279.99,
+    name: "ecobee Smart Thermostat Premium",
+    brand: "ecobee",
+    price: 259.99,
     quantity: 13,
     description:
-      "Google Nest smart thermostat that learns schedules, helps manage comfort, and supports connected home control.",
+      "ecobee's premium smart thermostat with built-in air quality monitoring and smart home voice control.",
     image_url:
-      "https://lh3.googleusercontent.com/XxwSWRqofPLTTO09iEw_xxknHCHTA_rYl59Ru4CYVAcJEuExZMJeRZhQqs3lQ6aQ5Rt2r9rUm306kzzhXa0dSHk12h75-yTgLg4=rj-sc0xffffffff",
+      "https://images.ctfassets.net/a3qyhfznts9y/tAhx9GbLSgvREJlzikx3U/67ac2db737af000f102a095ba0c3544c/Smart_Thermostat_Premium_-_US.png",
     category: "Smart Home",
   },
   {
-    name: "Nest Cam Indoor Wired 3rd Gen",
-    brand: "Google Nest",
-    price: 99.99,
+    name: "Arlo Pro 5S 2K 2-Camera Kit",
+    brand: "Arlo",
+    price: 299.99,
     quantity: 18,
     description:
-      "Wired indoor Nest security camera with Gemini-powered notifications and Google Home app integration.",
+      "Arlo wireless indoor/outdoor 2K security camera kit with spotlight, two-way audio, and smart home integrations.",
     image_url:
-      "https://lh3.googleusercontent.com/81sZCY_pEVkXlUS3Hi3PsJVZ3oIG1hhPPe5kdGAvJlFQwvOz1PYAg4IgUDyulpUlMs2iakQOmYFkIqIubLx-cqtH_VIyqZUk8A=rj-sc0xffffffff",
+      "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6582/6582063_sd.jpg",
     category: "Smart Home",
   },
   {
@@ -358,7 +359,7 @@ exports.products = [
     description:
       "Wireless outdoor security camera kit with high-resolution recording and local smart-home security features.",
     image_url:
-      "https://cdn.shopify.com/s/files/1/0504/7094/4954/files/Frame_191_5cfcabd4-c7ee-4f57-8b42-cfb08d0994b5.png?v=1760581575",
+      "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6594/6594664_sd.jpg",
     category: "Smart Home",
   },
 ];

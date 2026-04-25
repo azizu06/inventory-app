@@ -6,6 +6,10 @@ const {
 } = require("./validators");
 const { validationResult } = require("express-validator");
 
+exports.homeGet = async (req, res) => {
+  res.render("home");
+};
+
 exports.productsGet = async (req, res) => {
   const products = await db.getProducts(req.query);
   const categories = await db.getCategories();
@@ -22,9 +26,12 @@ exports.createProductPost = [
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res
-        .status(404)
-        .render("newProduct", { errors: errors.array(), product: req.body });
+      const categories = await db.getCategories();
+      return res.status(400).render("newProduct", {
+        errors: errors.array(),
+        product: req.body,
+        categories,
+      });
     }
     await db.addProduct(req.body);
     res.redirect("/products");
@@ -46,7 +53,7 @@ exports.createCategoryPost = [
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res
-        .status(404)
+        .status(400)
         .render("newCategory", { errors: errors.array(), category: req.body });
     }
     await db.addCategory(req.body);
@@ -57,6 +64,15 @@ exports.createCategoryPost = [
 exports.editProductGet = async (req, res) => {
   const { id } = req.params;
   const product = await db.findProduct(Number(id));
+  if (!product) {
+    const categories = await db.getCategories();
+    const products = await db.getProducts(req.query);
+    return res.status(404).render("products", {
+      categories,
+      products,
+      errors: [{ msg: "Product not found" }],
+    });
+  }
   const categories = await db.getCategories();
   res.render("productEdit", { categories, product, values: product });
 };
@@ -65,19 +81,26 @@ exports.editProductPost = [
   validateEditProduct,
   async (req, res) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      const { id } = req.params;
+    const { id } = req.params;
+    const product = await db.findProduct(Number(id));
+    if (!product) {
       const categories = await db.getCategories();
-      const product = await db.findProduct(Number(id));
-
-      return res.status(404).render("productEdit", {
+      const products = await db.getProducts(req.query);
+      return res.status(404).render("products", {
+        categories,
+        products,
+        errors: [{ msg: "Product not found" }],
+      });
+    }
+    if (!errors.isEmpty()) {
+      const categories = await db.getCategories();
+      return res.status(400).render("productEdit", {
         errors: errors.array(),
         product,
         values: req.body,
         categories,
       });
     }
-    const { id } = req.params;
     await db.editProduct(req.body, id);
     res.redirect("/products");
   },
@@ -86,12 +109,30 @@ exports.editProductPost = [
 exports.viewProductGet = async (req, res) => {
   const { id } = req.params;
   const product = await db.findProduct(Number(id));
+  if (!product) {
+    const categories = await db.getCategories();
+    const products = await db.getProducts(req.query);
+    return res.status(404).render("products", {
+      categories,
+      products,
+      errors: [{ msg: "Product not found" }],
+    });
+  }
   res.render("productDetail", { product });
 };
 
 exports.deleteProductPost = async (req, res) => {
   const { id } = req.params;
-  await db.deleteProduct(Number(id));
+  const product = await db.deleteProduct(Number(id));
+  if (!product) {
+    const categories = await db.getCategories();
+    const products = await db.getProducts(req.query);
+    return res.status(404).render("products", {
+      categories,
+      products,
+      errors: [{ msg: "Product not found" }],
+    });
+  }
   res.redirect("/products");
 };
 

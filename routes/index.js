@@ -2,6 +2,8 @@ const { Router } = require("express");
 const router = Router();
 const controller = require("../controllers/index.js");
 
+router.get("/", controller.homeGet);
+
 router.get("/products", controller.productsGet);
 router.get("/products/new", controller.createProductsGet);
 router.post("/products/new", controller.createProductPost);
