@@ -699,6 +699,10 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 14px;
   outline: 0;
+  transition:
+    border-color 260ms var(--ease),
+    box-shadow 260ms var(--ease),
+    background 260ms var(--ease);
 }
 
 .field-block textarea {
@@ -708,6 +712,28 @@ h1 {
 
 .field-block select {
   appearance: none;
+  padding-right: 2.6rem;
+  color-scheme: dark;
+  background:
+    linear-gradient(45deg, transparent 50%, var(--accent-strong) 50%) right 1.25rem center / 0.42rem 0.42rem
+      no-repeat,
+    linear-gradient(135deg, var(--accent-strong) 50%, transparent 50%) right 0.96rem center / 0.42rem 0.42rem
+      no-repeat,
+    rgba(255, 255, 255, 0.06);
+}
+
+.field-block select option {
+  color: var(--text);
+  background: #171a14;
+}
+
+.field-block select option:checked {
+  color: #17230f;
+  background: var(--accent-strong);
+}
+
+.field-block select option:disabled {
+  color: rgba(201, 206, 195, 0.58);
 }
 
 .field-block input::placeholder,
