@@ -1,51 +1,10 @@
 const db = require("../db/queries");
 const {
-  query,
-  body,
-  validationResult,
-  matchedData,
-} = require("express-validator");
-
-const validateProduct = [
-  body("name")
-    .trim()
-    .isLength({ min: 2, max: 200 })
-    .withMessage("Name must be between 2 and 200 characters."),
-  body("price")
-    .isFloat({ min: 0 })
-    .withMessage("Price must be a number greater or equal to 0."),
-  body("quantity")
-    .isInt({ min: 0 })
-    .withMessage("Quantity must be a number greater or equal to 0."),
-  body("brand")
-    .optional({ checkFalsy: true })
-    .trim()
-    .isLength({ max: 200 })
-    .withMessage("Brand must be a max of 200 characters."),
-  body("description")
-    .optional({ checkFalsy: true })
-    .trim()
-    .isLength({ max: 500 })
-    .withMessage("Description must be a max of 500 characters."),
-  body("category_id").trim().notEmpty().withMessage("Category is required"),
-  body("image_url")
-    .optional({ checkFalsy: true })
-    .trim()
-    .isURL()
-    .withMessage("Image URL must be a valid URL."),
-];
-
-const validateCategory = [
-  body("name")
-    .trim()
-    .isLength({ min: 2, max: 200 })
-    .withMessage("Name must be between 2 and 200 characters."),
-  body("description")
-    .optional({ checkFalsy: true })
-    .trim()
-    .isLength({ max: 500 })
-    .withMessage("Description must be a max of 500 characters."),
-];
+  validateCategory,
+  validateCreateProduct,
+  validateEditProduct,
+} = require("./validators");
+const { validationResult } = require("express-validator");
 
 exports.productsGet = async (req, res) => {
   const products = await db.getProducts(req.query);
@@ -59,7 +18,7 @@ exports.createProductsGet = async (req, res) => {
 };
 
 exports.createProductPost = [
-  validateProduct,
+  validateCreateProduct,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -103,7 +62,7 @@ exports.editProductGet = async (req, res) => {
 };
 
 exports.editProductPost = [
-  validateProduct,
+  validateEditProduct,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -138,6 +97,18 @@ exports.deleteProductPost = async (req, res) => {
 
 exports.deleteCategoryPost = async (req, res) => {
   const { id } = req.params;
-  await db.deleteCategory(Number(id));
-  res.redirect("/categories");
+  try {
+    await db.deleteCategory(Number(id));
+    res.redirect("/categories");
+  } catch (err) {
+    const categories = await db.getCategories();
+    res.render("categories", {
+      categories,
+      errors: [
+        {
+          msg: "Cannot delete this category yet. Remove or reassign its products first.",
+        },
+      ],
+    });
+  }
 };
