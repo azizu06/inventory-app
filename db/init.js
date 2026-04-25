@@ -33,35 +33,29 @@ const main = async () => {
   });
 
   await client.connect();
-
   try {
     await client.query("BEGIN");
     await client.query(createTables);
-
     const categoryMap = new Map();
-
     for (const category of categories) {
       const { rows } = await client.query(
         `
-          INSERT INTO categories (name, description)
-          VALUES ($1, $2)
-          RETURNING id, name
+        INSERT INTO categories (name, description)
+        VALUES ($1, $2)
+        RETURNING id, name
         `,
         [category.name, category.description],
       );
-
       categoryMap.set(rows[0].name, rows[0].id);
     }
 
     for (const product of products) {
       const categoryId = categoryMap.get(product.category);
-
       await client.query(
         `
-          INSERT INTO products
+          INSERT INTO products 
             (name, brand, price, quantity, description, image_url, category_id)
-          VALUES
-            ($1, $2, $3, $4, $5, $6, $7)
+          VALUES ($1, $2, $3, $4, $5, $6, $7)
         `,
         [
           product.name,
@@ -74,19 +68,16 @@ const main = async () => {
         ],
       );
     }
-
     await client.query("COMMIT");
-    console.log(`Seeded ${categories.length} categories.`);
-    console.log(`Seeded ${products.length} products.`);
-  } catch (error) {
+  } catch (err) {
     await client.query("ROLLBACK");
-    throw error;
+    throw err;
   } finally {
     await client.end();
   }
 };
 
-main().catch((error) => {
-  console.error(error);
+main().catch((err) => {
+  console.error(err);
   process.exit(1);
 });
