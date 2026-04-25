@@ -592,8 +592,39 @@ h1 {
 .filter-panel {
   position: sticky;
   top: 6rem;
-  padding: 0.9rem;
+  max-height: calc(100dvh - 7.5rem);
+  overflow: hidden;
+  padding: 0.55rem;
   border-radius: 24px;
+}
+
+.filter-scroll-area {
+  max-height: calc(100dvh - 8.6rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.35rem 0.65rem 0.35rem 0.35rem;
+  border-radius: 19px;
+  scrollbar-color: rgba(201, 247, 146, 0.34) rgba(255, 255, 255, 0.06);
+  scrollbar-width: thin;
+}
+
+.filter-scroll-area::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+.filter-scroll-area::-webkit-scrollbar-track {
+  margin-block: 0.65rem;
+  background: rgba(255, 255, 255, 0.045);
+  border: 0.28rem solid transparent;
+  background-clip: content-box;
+  border-radius: 999px;
+}
+
+.filter-scroll-area::-webkit-scrollbar-thumb {
+  background: rgba(201, 247, 146, 0.32);
+  border: 0.28rem solid transparent;
+  background-clip: content-box;
+  border-radius: 999px;
 }
 
 .filter-panel form,
@@ -1116,6 +1147,14 @@ h1 {
   .form-intro,
   .filter-panel {
     position: static;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .filter-scroll-area {
+    max-height: none;
+    overflow: visible;
+    padding: 0.35rem;
   }
 
   .catalog-layout {

@@ -1,4 +1,5 @@
 /*! tailwindcss v4.2.2 | MIT License | https://tailwindcss.com */
+@layer properties;
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
@@ -174,6 +175,9 @@
   }
   .start {
     inset-inline-start: var(--spacing);
+  }
+  .filter {
+    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
 }
 :root {
@@ -647,8 +651,35 @@ h1 {
 .filter-panel {
   position: sticky;
   top: 6rem;
-  padding: 0.9rem;
+  max-height: calc(100dvh - 7.5rem);
+  overflow: hidden;
+  padding: 0.55rem;
   border-radius: 24px;
+}
+.filter-scroll-area {
+  max-height: calc(100dvh - 8.6rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.35rem 0.65rem 0.35rem 0.35rem;
+  border-radius: 19px;
+  scrollbar-color: rgba(201, 247, 146, 0.34) rgba(255, 255, 255, 0.06);
+  scrollbar-width: thin;
+}
+.filter-scroll-area::-webkit-scrollbar {
+  width: 0.8rem;
+}
+.filter-scroll-area::-webkit-scrollbar-track {
+  margin-block: 0.65rem;
+  background: rgba(255, 255, 255, 0.045);
+  border: 0.28rem solid transparent;
+  background-clip: content-box;
+  border-radius: 999px;
+}
+.filter-scroll-area::-webkit-scrollbar-thumb {
+  background: rgba(201, 247, 146, 0.32);
+  border: 0.28rem solid transparent;
+  background-clip: content-box;
+  border-radius: 999px;
 }
 .filter-panel form, .stacked-form {
   display: grid;
@@ -1065,6 +1096,13 @@ h1 {
   }
   .form-intro, .filter-panel {
     position: static;
+    max-height: none;
+    overflow: visible;
+  }
+  .filter-scroll-area {
+    max-height: none;
+    overflow: visible;
+    padding: 0.35rem;
   }
   .catalog-layout {
     grid-template-columns: 1fr;
@@ -1114,5 +1152,77 @@ h1 {
   }
   .detail-media {
     min-height: 26rem;
+  }
+}
+@property --tw-blur {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-brightness {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-contrast {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-grayscale {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-hue-rotate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-invert {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-opacity {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-saturate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-sepia {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-drop-shadow {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-drop-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-drop-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-drop-shadow-size {
+  syntax: "*";
+  inherits: false;
+}
+@layer properties {
+  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
+    *, ::before, ::after, ::backdrop {
+      --tw-blur: initial;
+      --tw-brightness: initial;
+      --tw-contrast: initial;
+      --tw-grayscale: initial;
+      --tw-hue-rotate: initial;
+      --tw-invert: initial;
+      --tw-opacity: initial;
+      --tw-saturate: initial;
+      --tw-sepia: initial;
+      --tw-drop-shadow: initial;
+      --tw-drop-shadow-color: initial;
+      --tw-drop-shadow-alpha: 100%;
+      --tw-drop-shadow-size: initial;
+    }
   }
 }
