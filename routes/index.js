@@ -1,23 +1,24 @@
 const { Router } = require("express");
 const router = Router();
-const controller = require("../controllers/index.js");
+const productController = require("../controllers/product.js");
+const categoryController = require("../controllers/category.js");
 
-router.get("/", controller.homeGet);
+router.get("/", categoryController.homeGet);
 
-router.get("/products", controller.productsGet);
-router.get("/products/new", controller.createProductsGet);
-router.post("/products/new", controller.createProductPost);
+router.get("/products", productController.productsGet);
+router.get("/products/new", productController.createProductsGet);
+router.post("/products/new", productController.createProductPost);
 
-router.get("/products/:id", controller.viewProductGet);
-router.get("/products/:id/edit", controller.editProductGet);
-router.post("/products/:id/edit", controller.editProductPost);
-router.get("/products/:id/delete", controller.deleteProductGet);
-router.post("/products/:id/delete", controller.deleteProductPost);
+router.get("/products/:id", productController.viewProductGet);
+router.get("/products/:id/edit", productController.editProductGet);
+router.post("/products/:id/edit", productController.editProductPost);
+router.get("/products/:id/delete", productController.deleteProductGet);
+router.post("/products/:id/delete", productController.deleteProductPost);
 
-router.get("/categories", controller.categoriesGet);
-router.get("/categories/new", controller.createCategoryGet);
-router.post("/categories/new", controller.createCategoryPost);
-router.get("/categories/:id/delete", controller.deleteCategoryGet);
-router.post("/categories/:id/delete", controller.deleteCategoryPost);
+router.get("/categories", categoryController.categoriesGet);
+router.get("/categories/new", categoryController.createCategoryGet);
+router.post("/categories/new", categoryController.createCategoryPost);
+router.get("/categories/:id/delete", categoryController.deleteCategoryGet);
+router.post("/categories/:id/delete", categoryController.deleteCategoryPost);
 
 module.exports = router;
