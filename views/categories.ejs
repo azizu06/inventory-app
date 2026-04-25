@@ -3,42 +3,68 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Explore TechCenter inventory categories and jump into filtered product collections."
+    />
     <link rel="stylesheet" href="/styles.css" />
-    <title>Categories</title>
+    <title>Categories | TechCenter</title>
   </head>
   <body>
     <%- include("navbar.ejs") %>
-    <div class="flex flex-col gap-4">
-      <div class="flex gap-2">
-        <h1>Categories</h1>
-        <a href="/categories/new" class="border rounded-lg p-2"
-          >Add a category</a
-        >
-      </div>
-      <%- include("errors.ejs") %>
-      <div class="flex flex-wrap max-w-lg gap-3">
-        <% categories.forEach((cat) => %>
-        <a
-          class="flex flex-col gap-2 justify-center"
-          href="/products?category_id=<%= cat.id %>"
-        >
-          <h2 class="justify-center"><%= cat.name %></h2>
-          <p><%= cat.description %></p>
-          <form
-            action="/categories/<%= cat.id %>/delete"
-            method="post"
-            class="flex w-full justify-center"
-          >
-            <button
-              type="submit"
-              class="flex justify-center p-2 border rounded-lg"
-            >
-              Delete
-            </button>
-          </form>
+    <main id="main-content" class="page-shell">
+      <section class="page-heading">
+        <div>
+          <p class="eyebrow">Catalog architecture</p>
+          <h1>Categories</h1>
+          <p>
+            Organize the storefront into focused collections for laptops,
+            smartphones, audio, displays, and gaming gear.
+          </p>
+        </div>
+        <a href="/categories/new" class="btn btn-primary">
+          Add category
+          <span aria-hidden="true">
+            <i data-lucide="plus"></i>
+          </span>
         </a>
-        <% ) %>
-      </div>
-    </div>
+      </section>
+
+      <%- include("errors.ejs") %>
+
+      <% if (categories.length) { %>
+      <section class="category-grid" aria-label="Inventory categories">
+        <% categories.forEach((cat, index) => { %>
+        <article class="category-card" style="--card-index: <%= index %>">
+          <a href="/products?category_id=<%= cat.id %>">
+            <span class="category-number">0<%= index + 1 %></span>
+            <h2><%= cat.name %></h2>
+            <% if (cat.description) { %>
+            <p><%= cat.description %></p>
+            <% } else { %>
+            <p>Browse every product assigned to this collection.</p>
+            <% } %>
+            <span class="category-link">
+              View collection
+              <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+            </span>
+          </a>
+          <form action="/categories/<%= cat.id %>/delete" method="post">
+            <button type="submit" class="text-danger">Delete category</button>
+          </form>
+        </article>
+        <% }) %>
+      </section>
+      <% } else { %>
+      <section class="empty-state">
+        <p class="eyebrow">No categories</p>
+        <h2>Start with a clean catalog structure.</h2>
+        <p>
+          Add a category before building product collections for the storefront.
+        </p>
+        <a href="/categories/new" class="btn btn-primary">Add category</a>
+      </section>
+      <% } %>
+    </main>
   </body>
 </html>

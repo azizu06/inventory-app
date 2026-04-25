@@ -1,13 +1,15 @@
-<% if(errors?.length){ %>
-<div class="flex flex-col gap-2">
-  <p>Submission Error</p>
-  <div class="flex flex-col">
-    <p>Fix the following issues before submitting.</p>
-    <ul>
-      <% errors.forEach(e) => { %>
-      <p><%= e.msg %></p>
-      <% } %>
+<% if (typeof errors !== "undefined" && errors?.length) { %>
+<section class="notice-panel" role="alert" aria-live="polite">
+  <div class="notice-icon" aria-hidden="true">
+    <i data-lucide="triangle-alert"></i>
+  </div>
+  <div>
+    <p class="notice-title">Review the highlighted details</p>
+    <ul class="notice-list">
+      <% errors.forEach((e) => { %>
+      <li><%= e.msg %></li>
+      <% }) %>
     </ul>
   </div>
-</div>
+</section>
 <% } %>

@@ -3,41 +3,66 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/stlyes.css" />
-    <title>Add Category</title>
+    <meta
+      name="description"
+      content="Create a new category for the TechCenter inventory catalog."
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Add category | TechCenter</title>
   </head>
   <body>
     <%- include("navbar.ejs") %>
-    <div class="flex flex-col gap-4">
-      <h1>Add a category</h1>
-      <%- include("errors.ejs") %>
-      <form action="/categories/new" method="post" class="flex flex-col gap-2">
-        <label for="name">Category:</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          value="<%= category.name %>"
-          required
-        />
-        <label for="description">Description:</label>
-        <textarea name="description" id="description">
-<%= category.description %></textarea
-        >
-        <div class="flex justify-between w-full">
-          <a
-            href="/categories"
-            class="flex p-2 justify-center border rounded-lg"
-            >Return to Categories</a
-          >
-          <button
-            type="submit"
-            class="flex p-2 justify-center border rounded-lg"
-          >
-            Submit
-          </button>
+    <main id="main-content" class="page-shell form-page">
+      <a href="/categories" class="back-link">
+        <i data-lucide="arrow-left" aria-hidden="true"></i>
+        Back to categories
+      </a>
+
+      <section class="form-layout compact-form-layout">
+        <div class="form-intro">
+          <p class="eyebrow">Catalog structure</p>
+          <h1>Add a category</h1>
+          <p>
+            Create a focused collection so shoppers can move through the
+            inventory by product type.
+          </p>
         </div>
-      </form>
-    </div>
+
+        <div class="form-card">
+          <%- include("errors.ejs") %>
+          <form action="/categories/new" method="post" class="stacked-form">
+            <div class="field-block">
+              <label for="name">Category name</label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                value="<%= category.name || '' %>"
+                placeholder="Displays"
+                required
+              />
+            </div>
+
+            <div class="field-block">
+              <label for="description">Description</label>
+              <textarea
+                name="description"
+                id="description"
+                placeholder="Describe what belongs in this collection."
+              >
+<%= category.description || '' %></textarea
+              >
+            </div>
+
+            <div class="form-actions">
+              <a href="/categories" class="btn btn-secondary">Cancel</a>
+              <button type="submit" class="btn btn-primary">
+                Create category
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
   </body>
 </html>

@@ -1,12 +1,30 @@
-<div class="flex justify-between px-5">
-  <div class="flex gap-2">
-    <p>TechCenter</p>
-    <p>Home</p>
-    <p>Products</p>
-    <p>Categories</p>
-  </div>
-  <form method="get" action="/products" class="flex gap-2">
-    <input type="text" name="search" placeholder="Search products..." />
-    <button type="submit" class="flex justify-center p-2">Search</button>
-  </form>
-</div>
+<header class="site-header">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="nav-shell" aria-label="Primary navigation">
+    <a class="brand-mark" href="/" aria-label="TechCenter home">
+      <span class="brand-orb" aria-hidden="true">
+        <i data-lucide="cpu"></i>
+      </span>
+      <span>TechCenter</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/products">Products</a>
+      <a href="/categories">Categories</a>
+    </div>
+
+    <form method="get" action="/products" class="nav-search" role="search">
+      <label class="sr-only" for="global-search">Search products</label>
+      <i data-lucide="search" aria-hidden="true"></i>
+      <input
+        id="global-search"
+        type="text"
+        name="search"
+        placeholder="Search the catalog"
+      />
+      <button type="submit">Search</button>
+    </form>
+  </nav>
+  <%- include("lucide.ejs") %>
+</header>

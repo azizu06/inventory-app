@@ -3,33 +3,62 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="View TechCenter product details, price, category, and inventory quantity."
+    />
     <link rel="stylesheet" href="/styles.css" />
-    <title><%= product.name %>></title>
+    <title><%= product.name %> | TechCenter</title>
   </head>
   <body>
     <%- include("navbar.ejs") %>
-    <div class="flex flex-col gap-4">
-      <a href="/products" class="border rounded-lg p-2">Return to Products</a>
-      <div class="flex gap-4 border rounded-xl">
-        <img src="<%= product.image_url %>" />
-        <div class="flex flex-col gap-2">
-          <div class="flex justify-between">
-            <p><%= product.name %></p>
-            <p>$<%= product.price %></p>
-          </div>
-          <p class="border-blue-400 rounded-xl p-3"><%= product.category %></p>
-          <p><%= product.description %></p>
-          <p>Quantity: <%= product.quantity %></p>
+    <% const detailDescription = product.description || "No description has been added for this product yet."; %>
+    <main id="main-content" class="page-shell">
+      <a href="/products" class="back-link">
+        <i data-lucide="arrow-left" aria-hidden="true"></i>
+        Back to products
+      </a>
+
+      <section class="detail-shell">
+        <div class="detail-media">
+          <img src="<%= product.image_url %>" alt="<%= product.name %>" />
         </div>
-      </div>
-      <div class="flex w-full gap-2 justify-end">
-        <a href="/products/<%= product.id %>/edit" class="border rounded-lg p-2"
-          >Edit</a
-        >
-        <form action="/products/<%= product.id %>/delete" method="post">
-          <button type="submit" class="border rounded-lg p-2">Delete</button>
-        </form>
-      </div>
-    </div>
+
+        <article class="detail-panel">
+          <div class="detail-kicker">
+            <span><%= product.brand || "TechCenter" %></span>
+            <span><%= product.category %></span>
+          </div>
+          <h1><%= product.name %></h1>
+          <p class="detail-price">$<%= Number(product.price).toFixed(2) %></p>
+          <p class="detail-description"><%= detailDescription %></p>
+
+          <div class="detail-stats">
+            <div>
+              <span>Quantity</span>
+              <strong><%= product.quantity %></strong>
+            </div>
+            <div>
+              <span>Category</span>
+              <strong><%= product.category %></strong>
+            </div>
+          </div>
+
+          <div class="detail-actions">
+            <a href="/products/<%= product.id %>/edit" class="btn btn-primary">
+              Edit product
+              <span aria-hidden="true">
+                <i data-lucide="pencil"></i>
+              </span>
+            </a>
+            <form action="/products/<%= product.id %>/delete" method="post">
+              <button type="submit" class="btn btn-danger">
+                Delete product
+              </button>
+            </form>
+          </div>
+        </article>
+      </section>
+    </main>
   </body>
 </html>

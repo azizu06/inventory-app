@@ -3,27 +3,89 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/stlyes.css" />
-    <title>Home</title>
+    <meta
+      name="description"
+      content="TechCenter is a premium storefront and inventory workspace for modern consumer technology."
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>TechCenter | Premium tech inventory</title>
   </head>
   <body>
     <%- include("navbar.ejs") %>
-    <div class="flex flex-col gap-4">
-      <div class="flex flex-col gap-3">
-        <h1>Welcome</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam a
-          itaque repellendus praesentium ea soluta fugiat voluptates libero
-          aliquam harum quisquam molestiae blanditiis nam unde, quam magnam eius
-          saepe odio?
-        </p>
-      </div>
-      <div class="flex flex-col gap-3">
-        <a href="/products" class="border rounded-full p-2">View Products</a>
-        <a href="/categories" class="border rounded-full p-2"
-          >View Categories</a
-        >
-      </div>
-    </div>
+    <main id="main-content" class="page-shell">
+      <section class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Premium storefront inventory</p>
+          <h1>Premium tech inventory, ready to browse.</h1>
+          <p class="hero-text">
+            TechCenter brings products, categories, stock levels, and product
+            discovery into a polished command center for modern hardware.
+          </p>
+          <div class="hero-actions">
+            <a href="/products" class="btn btn-primary">
+              Browse products
+              <span aria-hidden="true">
+                <i data-lucide="arrow-up-right"></i>
+              </span>
+            </a>
+            <a href="/categories" class="btn btn-secondary">View categories</a>
+          </div>
+        </div>
+
+        <div class="showcase-device" aria-label="TechCenter product showcase">
+          <div class="device-topbar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="device-stage">
+            <article class="featured-product-card">
+              <p class="micro-label">Live catalog</p>
+              <h2>Flagship systems, audio, displays, and gaming gear.</h2>
+              <div class="spec-row">
+                <span>Stock depth</span>
+                <strong>147 units</strong>
+              </div>
+              <div class="spec-row">
+                <span>Categories</span>
+                <strong>5 active</strong>
+              </div>
+            </article>
+            <div class="product-stack" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="insight-band" aria-label="Inventory highlights">
+        <article>
+          <span class="metric">Fast</span>
+          <h2>Search-led browsing</h2>
+          <p>
+            Find products by name and narrow the catalog without leaving the
+            storefront flow.
+          </p>
+        </article>
+        <article>
+          <span class="metric">Clear</span>
+          <h2>Stock visibility</h2>
+          <p>
+            Quantity, brand, category, and price stay readable on every product
+            card.
+          </p>
+        </article>
+        <article>
+          <span class="metric">Ready</span>
+          <h2>Inventory actions</h2>
+          <p>
+            Create, edit, and remove products with forms that feel intentional
+            instead of raw.
+          </p>
+        </article>
+      </section>
+    </main>
   </body>
 </html>

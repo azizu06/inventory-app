@@ -3,79 +3,132 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Add a new product to the TechCenter inventory catalog."
+    />
     <link rel="stylesheet" href="/styles.css" />
-    <title>Add Product</title>
+    <title>Add product | TechCenter</title>
   </head>
   <body>
     <%- include("navbar.ejs") %>
-    <div class="flex flex-col gap-4">
-      <h1>Add a Product</h1>
-      <%- include("errors.ejs") %>
-      <form action="/products/new" method="post" class="flex flex-col gap-2">
-        <label for="name">Name:</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          value="<%= product.name %>"
-          required
-        />
-        <label for="price">Price:</label>
-        <input
-          type="number"
-          name="price"
-          id="price"
-          value="<%= product.price %>"
-          required
-        />
-        <label for="quantity">Quantity:</label>
-        <input
-          type="number"
-          name="quantity"
-          id="quantity"
-          value="<%= product.quantity %>"
-          required
-        />
-        <label for="brand">Brand:</label>
-        <input
-          type="text"
-          name="brand"
-          id="brand"
-          value="<%= product.brand %>"
-        />
-        <label for="description">Description:</label>
-        <textarea name="description" id="description">
-<%= product.description %></textarea
-        >
-        <label for="category_id">Category:</label>
-        <select name="category_id" id="category_id" required>
-          <% categories.forEach((cat) => {
-          <% if(Number(product.category_id) === cat.id){ %>
-          <option value="<%= cat.id %>" selected><%= cat.name %></option>
-          <% } else { %>
-          <option value="<%= cat.id %>"><%= cat.name %></option>
-          <% } %>
-          <% }) %>
-        </select>
-        <label for="image_url">Image URL:</label>
-        <input
-          type="text"
-          name="image_url"
-          id="image_url"
-          value="<%= product.image_url %>"
-        />
-        <div class="flex justify-between w-full">
-          <a href="/products" class="flex p-2 justify-center border rounded-lg"
-            >Return to Products</a
-          >
-          <button
-            type="submit"
-            class="flex p-2 justify-center border rounded-lg"
-          >
-            Submit
-          </button>
+    <main id="main-content" class="page-shell form-page">
+      <a href="/products" class="back-link">
+        <i data-lucide="arrow-left" aria-hidden="true"></i>
+        Back to products
+      </a>
+
+      <section class="form-layout">
+        <div class="form-intro">
+          <p class="eyebrow">New inventory item</p>
+          <h1>Add a product</h1>
+          <p>
+            Add the essentials customers need first: product name, pricing,
+            available quantity, category, and a clean product image.
+          </p>
         </div>
-      </form>
-    </div>
+
+        <div class="form-card">
+          <%- include("errors.ejs") %>
+          <form action="/products/new" method="post" class="stacked-form">
+            <div class="field-block">
+              <label for="name">Product name</label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                value="<%= product.name || '' %>"
+                placeholder="MacBook Air 15-inch"
+                required
+              />
+            </div>
+
+            <div class="form-two-col">
+              <div class="field-block">
+                <label for="price">Price</label>
+                <input
+                  type="number"
+                  name="price"
+                  id="price"
+                  value="<%= product.price || '' %>"
+                  placeholder="1299.00"
+                  step="0.01"
+                  required
+                />
+              </div>
+              <div class="field-block">
+                <label for="quantity">Quantity</label>
+                <input
+                  type="number"
+                  name="quantity"
+                  id="quantity"
+                  value="<%= product.quantity || '' %>"
+                  placeholder="14"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="field-block">
+              <label for="brand">Brand</label>
+              <input
+                type="text"
+                name="brand"
+                id="brand"
+                value="<%= product.brand || '' %>"
+                placeholder="Apple"
+              />
+            </div>
+
+            <div class="field-block">
+              <label for="description">Description</label>
+              <textarea
+                name="description"
+                id="description"
+                placeholder="Describe the product, materials, audience, or feature set."
+              >
+<%= product.description || '' %></textarea
+              >
+            </div>
+
+            <div class="field-block">
+              <label for="category_id">Category</label>
+              <select name="category_id" id="category_id" required>
+                <option value="">Select a category</option>
+                <% const safeCategories = typeof categories !== "undefined" ? categories : []; %>
+                <% safeCategories.forEach((cat) => { %>
+                <% if (Number(product.category_id) === cat.id) { %>
+                <option value="<%= cat.id %>" selected><%= cat.name %></option>
+                <% } else { %>
+                <option value="<%= cat.id %>"><%= cat.name %></option>
+                <% } %>
+                <% }) %>
+              </select>
+            </div>
+
+            <div class="field-block">
+              <label for="image_url">Image URL</label>
+              <input
+                type="text"
+                name="image_url"
+                id="image_url"
+                value="<%= product.image_url || '' %>"
+                placeholder="https://example.com/product.png"
+              />
+              <p class="helper-text">
+                Use a direct image URL for the product card and detail page.
+              </p>
+            </div>
+
+            <div class="form-actions">
+              <a href="/products" class="btn btn-secondary">Cancel</a>
+              <button type="submit" class="btn btn-primary">
+                Create product
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
   </body>
 </html>

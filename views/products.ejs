@@ -3,75 +3,144 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Browse the TechCenter product catalog with storefront filters and inventory signals."
+    />
     <link rel="stylesheet" href="/styles.css" />
-    <title>Products</title>
+    <title>Products | TechCenter</title>
   </head>
   <body>
     <%- include("navbar.ejs") %>
-    <div class="flex flex-col gap-6">
-      <div class="flex gap-2">
-        <h1>Products</h1>
-        <a href="/products/new" class="border rounded-lg p-2">Add a Product</a>
-      </div>
-      <div class="flex">
-        <form method="get" action="/products" class="flex flex-col gap-3 w-sm">
-          <div class="flex flex-col gap-1">
-            <h3>Sort by Price:</h3>
-            <label>
-              <input type="radio" name="price" value="asc" />Ascending</label
-            >
-            <label>
-              <input type="radio" name="price" value="desc" />Descending</label
-            >
-          </div>
-          <div class="flex flex-col gap-1">
-            <h3>Sort by Name:</h3>
-            <label>
-              <input type="radio" name="name" value="asc" />Ascending</label
-            >
-            <label>
-              <input type="radio" name="name" value="desc" />Descending</label
-            >
-          </div>
-          <div class="flex flex-col gap-1">
-            <h3>Filter by Category:</h3>
-            <% categories.forEach((cat) => { %>
-            <label>
+    <main id="main-content" class="page-shell catalog-page">
+      <section class="page-heading">
+        <div>
+          <p class="eyebrow">Storefront catalog</p>
+          <h1>Products</h1>
+          <p>
+            Browse premium hardware, compare stock levels, and open any product
+            for a detailed inventory view.
+          </p>
+        </div>
+        <a href="/products/new" class="btn btn-primary">
+          Add product
+          <span aria-hidden="true">
+            <i data-lucide="plus"></i>
+          </span>
+        </a>
+      </section>
+
+      <%- include("errors.ejs") %>
+
+      <section class="catalog-layout">
+        <aside class="filter-panel" aria-label="Product filters">
+          <form method="get" action="/products">
+            <div class="filter-header">
+              <span>Refine catalog</span>
+              <a href="/products">Reset</a>
+            </div>
+
+            <div class="field-block">
+              <label for="catalog-search">Search</label>
               <input
-                type="checkbox"
-                name="category_id[]"
-                value="<%= cat.id %>"
+                id="catalog-search"
+                type="text"
+                name="search"
+                placeholder="Product name"
               />
-              <%= cat.name %>
-            </label>
-            <% }) %>
-          </div>
-          <button type="submit" class="boreder rounded-full p-2">
-            Apply Filters
-          </button>
-        </form>
-        <div class="flex flex-wrap gap-3 w-xl border p-5">
-          <% products.forEach((p) => { %>
-          <a class="flex flex-col gap-1 p-1" href="/products/<%= p.id %>">
-            <div class="flex flex-col flex-1 gap-1">
-              <img src="<%= p.image_url %>" />
-              <div class="flex justify-between">
-                <p><%= p.name %></p>
-                <p>$<%= p.price %></p>
+            </div>
+
+            <fieldset class="option-group">
+              <legend>Price order</legend>
+              <label class="choice-chip">
+                <input type="radio" name="price" value="asc" />
+                <span>Lowest first</span>
+              </label>
+              <label class="choice-chip">
+                <input type="radio" name="price" value="desc" />
+                <span>Highest first</span>
+              </label>
+            </fieldset>
+
+            <fieldset class="option-group">
+              <legend>Name order</legend>
+              <label class="choice-chip">
+                <input type="radio" name="name" value="asc" />
+                <span>A to Z</span>
+              </label>
+              <label class="choice-chip">
+                <input type="radio" name="name" value="desc" />
+                <span>Z to A</span>
+              </label>
+            </fieldset>
+
+            <fieldset class="option-group">
+              <legend>Category</legend>
+              <% const safeCategories = typeof categories !== "undefined" ? categories : []; %>
+              <% safeCategories.forEach((cat) => { %>
+              <label class="choice-chip">
+                <input
+                  type="checkbox"
+                  name="category_id"
+                  value="<%= cat.id %>"
+                />
+                <span><%= cat.name %></span>
+              </label>
+              <% }) %>
+            </fieldset>
+
+            <button type="submit" class="btn btn-primary filter-submit">
+              Apply filters
+              <span aria-hidden="true">
+                <i data-lucide="check"></i>
+              </span>
+            </button>
+          </form>
+        </aside>
+
+        <section class="product-grid" aria-label="Product results">
+          <% if (products.length) { %> <% products.forEach((p, index) => { %>
+          <a
+            class="product-card"
+            href="/products/<%= p.id %>"
+            style="--card-index: <%= index %>"
+          >
+            <div class="product-media">
+              <img src="<%= p.image_url %>" alt="<%= p.name %>" />
+              <span class="stock-badge"> <%= p.quantity %> in stock </span>
+            </div>
+            <div class="product-card-body">
+              <div class="product-meta">
+                <span><%= p.brand || "TechCenter" %></span>
+                <span><%= p.category %></span>
               </div>
-              <div class="flex flex-col gap-1">
-                <p>
-                  Brand:
-                  <%= p.brand %>
-                </p>
-                <p>Quantity: <%= p.quantity %></p>
+              <div class="product-title-row">
+                <h2><%= p.name %></h2>
+                <p>$<%= Number(p.price).toFixed(2) %></p>
+              </div>
+              <div class="product-footer">
+                <span>View details</span>
+                <i data-lucide="arrow-up-right" aria-hidden="true"></i>
               </div>
             </div>
-            <p><%= p.category %></p>
           </a>
           <% }) %>
-        </div>
-      </div>
-    </div>
+          <% } else { %>
+          <div class="empty-state">
+            <p class="eyebrow">No matches</p>
+            <h2>No products fit those filters.</h2>
+            <p>
+              Clear the filters or add a new product to bring this catalog back
+              into view.
+            </p>
+            <div class="hero-actions">
+              <a href="/products" class="btn btn-secondary">Clear filters</a>
+              <a href="/products/new" class="btn btn-primary">Add product</a>
+            </div>
+          </div>
+          <% } %>
+        </section>
+      </section>
+    </main>
   </body>
 </html>

@@ -3,75 +3,112 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Update pricing, stock, brand, category, and description for a TechCenter product."
+    />
     <link rel="stylesheet" href="/styles.css" />
-    <title><%= product.name %>></title>
+    <title>Edit <%= product.name %> | TechCenter</title>
   </head>
   <body>
     <%- include("navbar.ejs") %>
-    <div class="flex flex-col gap-4">
-      <a href="/products/<%= product.id %>" class="border rounded-lg p-2"
-        >Return to
-        <%= product.name %></a
-      >
-      <div class="flex gap-4 border rounded-xl">
-        <img src="<%= product.image_url %>" />
-        <%- include("errors.ejs") %>
-        <form
-          method="post"
-          action="/products/<%= product.id %>/edit"
-          class="flex flex-col gap-2"
-        >
-          <div class="flex justify-between">
-            <p><%= product.name %></p>
-            <div class="flex gap-1">
-              <label for="price">$</label>
-              <input
-                type="number"
-                name="price"
-                id="price"
-                value="<%= values.price %>"
-              />
+    <main id="main-content" class="page-shell form-page">
+      <a href="/products/<%= product.id %>" class="back-link">
+        <i data-lucide="arrow-left" aria-hidden="true"></i>
+        Back to product
+      </a>
+
+      <section class="form-layout">
+        <div class="form-intro">
+          <p class="eyebrow">Inventory update</p>
+          <h1>
+            Edit
+            <%= product.name %>
+          </h1>
+          <p>
+            Tune the storefront details that change most often: price, stock,
+            brand, category, and product positioning.
+          </p>
+          <div class="mini-preview">
+            <img src="<%= product.image_url %>" alt="<%= product.name %>" />
+            <div>
+              <span><%= product.category %></span>
+              <strong><%= product.name %></strong>
             </div>
           </div>
-          <select
-            name="category_id"
-            id="category_id"
-            class="border-blue-400 rounded-xl p-3"
+        </div>
+
+        <div class="form-card">
+          <%- include("errors.ejs") %>
+          <form
+            method="post"
+            action="/products/<%= product.id %>/edit"
+            class="stacked-form"
           >
-            <% categories.forEach((cat) => { %>
-            <% if(Number(values.category_id) === cat.id){ %>
-            <option value="<%= cat.id %>" selected>
-              <%= cat.name %>
-            </option>
-            <% } else { %>
-            <option value="<%= cat.id %>"><%= cat.name %></option>
-            <% } %>
-            <% }) %>
-          </select>
-          <label for="brand"></label>
-          <input
-            type="text"
-            name="brand"
-            id="brand"
-            value="<%= values.brand %>"
-          />
-          <textarea name="description" id="description">
-<%= values.description %></textarea
-          >
-          <div class="flex gap-1">
-            <label for="quantity">Quantity:</label>
-            <input
-              type="number"
-              name="quantity"
-              id="quantity"
-              value="<%= values.quantity %>"
-            />
-          </div>
-          <button class="w-full flex justify-center border rounded-lg p-2">
-            Submit Edits
-          </button>
-        </form>
-      </div>
-    </div>
+            <div class="form-two-col">
+              <div class="field-block">
+                <label for="price">Price</label>
+                <input
+                  type="number"
+                  name="price"
+                  id="price"
+                  value="<%= values.price || '' %>"
+                  step="0.01"
+                />
+              </div>
+              <div class="field-block">
+                <label for="quantity">Quantity</label>
+                <input
+                  type="number"
+                  name="quantity"
+                  id="quantity"
+                  value="<%= values.quantity || '' %>"
+                />
+              </div>
+            </div>
+
+            <div class="field-block">
+              <label for="category_id">Category</label>
+              <select name="category_id" id="category_id">
+                <% const safeCategories = typeof categories !== "undefined" ?
+                categories : []; %> <% safeCategories.forEach((cat) => { %>
+                <% if (Number(values.category_id) === cat.id) { %>
+                <option value="<%= cat.id %>" selected><%= cat.name %></option>
+                <% } else { %>
+                <option value="<%= cat.id %>"><%= cat.name %></option>
+                <% } %>
+                <% }) %>
+              </select>
+            </div>
+
+            <div class="field-block">
+              <label for="brand">Brand</label>
+              <input
+                type="text"
+                name="brand"
+                id="brand"
+                value="<%= values.brand || '' %>"
+              />
+            </div>
+
+            <div class="field-block">
+              <label for="description">Description</label>
+              <textarea name="description" id="description">
+<%= values.description || '' %></textarea
+              >
+            </div>
+
+            <div class="form-actions">
+              <a href="/products/<%= product.id %>" class="btn btn-secondary"
+                >Cancel</a
+              >
+              <button type="submit" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
   </body>
 </html>
