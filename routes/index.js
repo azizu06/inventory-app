@@ -8,8 +8,8 @@ router.post("/products/new", controller.createProductPost);
 
 router.get("/products/:id", controller.viewProductGet);
 router.get("/products/:id/edit", controller.editProductGet);
-router.post("/product/:id/edit", controller.editProductPost);
-router.post("/product/:id/delete", controller.deleteProductPost);
+router.post("/products/:id/edit", controller.editProductPost);
+router.post("/products/:id/delete", controller.deleteProductPost);
 
 router.get("/categories", controller.categoriesGet);
 router.get("/categories/new", controller.createCategoryGet);

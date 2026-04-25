@@ -13,9 +13,17 @@
       <%- include("errors.ejs") %>
       <form action="/categories/new" method="post" class="flex flex-col gap-2">
         <label for="name">Category:</label>
-        <input type="text" name="name" id="name" required />
-        <label for="desc">Description:</label>
-        <textarea name="desc" id="desc"></textarea>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          value="<%= category.name %>"
+          required
+        />
+        <label for="description">Description:</label>
+        <textarea name="description" id="description">
+<%= category.description %></textarea
+        >
         <div class="flex justify-between w-full">
           <a
             href="/categories"

@@ -134,5 +134,5 @@ exports.findProduct = async (id) => {
     WHERE p.id = $1`,
     [id],
   );
-  return rows;
+  return rows[0];
 };

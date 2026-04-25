@@ -17,7 +17,7 @@
           type="text"
           name="name"
           id="name"
-          value="<%= values.name %>"
+          value="<%= product.name %>"
           required
         />
         <label for="price">Price:</label>
@@ -25,7 +25,7 @@
           type="number"
           name="price"
           id="price"
-          value="<%= values.price %>"
+          value="<%= product.price %>"
           required
         />
         <label for="quantity">Quantity:</label>
@@ -33,7 +33,7 @@
           type="number"
           name="quantity"
           id="quantity"
-          value="<%= values.quantity %>"
+          value="<%= product.quantity %>"
           required
         />
         <label for="brand">Brand:</label>
@@ -41,28 +41,28 @@
           type="text"
           name="brand"
           id="brand"
-          value="<%= values.brand %>"
+          value="<%= product.brand %>"
         />
         <label for="description">Description:</label>
         <textarea name="description" id="description">
-<%= values.description %></textarea
+<%= product.description %></textarea
         >
-        <label for="category">Category:</label>
-        <select name="category" id="category" required>
+        <label for="category_id">Category:</label>
+        <select name="category_id" id="category_id" required>
           <% categories.forEach((cat) => {
-          <% if(values.category === cat.name){ %>
-          <option value="<%= cat.name %>" selected><%= cat.name %></option>
+          <% if(product.category === cat.name){ %>
+          <option value="<%= cat.id %>" selected><%= cat.name %></option>
           <% } else { %>
-          <option value="<%= cat.name %>"><%= cat.name %></option>
+          <option value="<%= cat.id %>"><%= cat.name %></option>
           <% } %>
           <% }) %>
         </select>
-        <label for="image">Image URL:</label>
+        <label for="image_url">Image URL:</label>
         <input
           type="text"
-          name="image"
-          id="image"
-          value="<%= values.image %>"
+          name="image_url"
+          id="image_url"
+          value="<%= product.image_url %>"
         />
         <div class="flex justify-between w-full">
           <a href="/products" class="flex p-2 justify-center border rounded-lg"
