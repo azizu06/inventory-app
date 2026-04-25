@@ -71,18 +71,15 @@ exports.deleteCategoryPost = [
       });
     }
     const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).render("confirmDelete", {
-        errors: errors.array(),
+    const formErrors = errors.array();
+    const { password } = req.body || {};
+    if (password !== adminPass) formErrors.push({ msg: "Incorrect password." });
+    if (formErrors.length > 0) {
+      const code = !errors.isEmpty() ? 400 : 403;
+      return res.status(code).render("confirmDelete", {
+        errors: formErrors,
         item: category,
         type: "categories",
-      });
-    }
-    const { password } = req.body || {};
-    if (password !== adminPass) {
-      return res.status(403).render("categories", {
-        categories,
-        errors: [{ msg: "Incorrect password." }],
       });
     }
     try {

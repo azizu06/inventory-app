@@ -71,7 +71,6 @@ exports.editProductPost = [
   validateEditProduct,
   validatePassword,
   async (req, res) => {
-    const errors = validationResult(req);
     const { id } = req.params;
     const product = await db.findProduct(Number(id));
     const categories = await db.getCategories();
@@ -84,19 +83,15 @@ exports.editProductPost = [
         errors: [{ msg: "Product not found" }],
       });
     }
-    if (!errors.isEmpty()) {
-      return res.status(400).render("productEdit", {
-        errors: errors.array(),
+    const errors = validationResult(req);
+    const formErrors = errors.array();
+    const { password } = req.body || {};
+    if (password !== adminPass) formErrors.push({ msg: "Incorrect password." });
+    if (formErrors.length > 0) {
+      const code = !errors.isEmpty() ? 400 : 403;
+      return res.status(code).render("productEdit", {
+        errors: formErrors,
         product,
-        values: req.body,
-        categories,
-      });
-    }
-    const { password } = req.body;
-    if (password !== adminPass) {
-      return res.status(403).render("productEdit", {
-        product,
-        errors: [{ msg: "Incorrect password." }],
         values: req.body,
         categories,
       });
@@ -139,7 +134,6 @@ exports.deleteProductGet = async (req, res) => {
 exports.deleteProductPost = [
   validatePassword,
   async (req, res) => {
-    const errors = validationResult(req);
     const { id } = req.params;
     const product = await db.findProduct(Number(id));
     if (!product) {
@@ -151,18 +145,16 @@ exports.deleteProductPost = [
         errors: [{ msg: "Product not found" }],
       });
     }
-    if (!errors.isEmpty()) {
-      return res.status(400).render("confirmDelete", {
-        errors: errors.array(),
+    const errors = validationResult(req);
+    const formErrors = errors.array();
+    const { password } = req.body || {};
+    if (password !== adminPass) formErrors.push({ msg: "Incorrect password." });
+    if (formErrors.length > 0) {
+      const code = !errors.isEmpty() ? 400 : 403;
+      return res.status(code).render("confirmDelete", {
+        errors: formErrors,
         item: product,
         type: "products",
-      });
-    }
-    const { password } = req.body || {};
-    if (password !== adminPass) {
-      return res.status(403).render("productDetail", {
-        product,
-        errors: [{ msg: "Incorrect password." }],
       });
     }
     await db.deleteProduct(Number(id));
