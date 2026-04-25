@@ -1,7 +1,7 @@
 {
   "name": "inventory-app",
   "version": "1.0.0",
-  "description": "Creating mini message board to practice express and ejs",
+  "description": "Inventory management app built with Express, EJS, and PostgreSQL",
   "main": "app.js",
   "scripts": {
     "start": "node routes/app.js",
@@ -13,16 +13,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/azizu06/message-board.git"
+    "url": "git+https://github.com/azizu06/inventory-app.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/azizu06/message-board/issues"
+    "url": "https://github.com/azizu06/inventory-app/issues"
   },
-  "homepage": "https://github.com/azizu06/message-board#readme",
+  "homepage": "https://github.com/azizu06/inventory-app#readme",
   "devDependencies": {
     "@tailwindcss/cli": "^4.2.2",
     "autoprefixer": "^10.5.0",
