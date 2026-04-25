@@ -37,8 +37,14 @@ exports.createProductPost = [
       await db.addProduct(req.body);
       res.redirect("/products");
     } catch (err) {
+      let msg;
+      if (err.code === "23505") {
+        msg = "A product with this name already exists.";
+      } else {
+        msg = "Something went wrong while saving. Please try again.";
+      }
       res.render("newProduct", {
-        errors: [{ msg: "A product with this name already exists." }],
+        errors: [{ msg }],
         product: req.body,
         categories,
       });
@@ -68,8 +74,14 @@ exports.createCategoryPost = [
       await db.addCategory(req.body);
       res.redirect("/categories");
     } catch (err) {
+      let msg;
+      if (err.code === "23505") {
+        msg = "A category with this name already exists.";
+      } else {
+        msg = "Something went wrong while saving. Please try again.";
+      }
       res.render("newCategory", {
-        errors: [{ msg: "A category with this name already exists." }],
+        errors: [{ msg }],
         category: req.body,
       });
     }
