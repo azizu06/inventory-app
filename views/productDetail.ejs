@@ -18,7 +18,7 @@
         <i data-lucide="arrow-left" aria-hidden="true"></i>
         Back to products
       </a>
-
+      <%- include("errors.ejs") %>
       <section class="detail-shell">
         <div class="detail-media">
           <img src="<%= product.image_url %>" alt="<%= product.name %>" />
@@ -51,11 +51,9 @@
                 <i data-lucide="pencil"></i>
               </span>
             </a>
-            <form action="/products/<%= product.id %>/delete" method="post">
-              <button type="submit" class="btn btn-danger">
-                Delete product
-              </button>
-            </form>
+            <a href="/products/<%= product.id %>/delete" class="btn btn-danger">
+              Delete product
+            </a>
           </div>
         </article>
       </section>

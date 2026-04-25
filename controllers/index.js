@@ -1,10 +1,14 @@
 const db = require("../db/queries");
+require("dotenv").config();
 const {
   validateCategory,
   validateCreateProduct,
   validateEditProduct,
+  validatePassword,
 } = require("./validators");
 const { validationResult } = require("express-validator");
+
+const adminPass = process.env.ADMIN_PASS;
 
 exports.homeGet = async (req, res) => {
   res.render("home");
@@ -106,10 +110,12 @@ exports.editProductGet = async (req, res) => {
 
 exports.editProductPost = [
   validateEditProduct,
+  validatePassword,
   async (req, res) => {
     const errors = validationResult(req);
     const { id } = req.params;
     const product = await db.findProduct(Number(id));
+    const categories = await db.getCategories();
     if (!product) {
       const categories = await db.getCategories();
       const products = await db.getProducts(req.query);
@@ -120,12 +126,18 @@ exports.editProductPost = [
       });
     }
     if (!errors.isEmpty()) {
-      const categories = await db.getCategories();
       return res.status(400).render("productEdit", {
         errors: errors.array(),
         product,
         values: req.body,
         categories,
+      });
+    }
+    const { password } = req.body;
+    if (password !== adminPass) {
+      return res.status(403).render("productDetail", {
+        product,
+        errors: [{ msg: "Incorrect password." }],
       });
     }
     await db.editProduct(req.body, id);
@@ -148,9 +160,9 @@ exports.viewProductGet = async (req, res) => {
   res.render("productDetail", { product });
 };
 
-exports.deleteProductPost = async (req, res) => {
+exports.deleteProductGet = async (req, res) => {
   const { id } = req.params;
-  const product = await db.deleteProduct(Number(id));
+  const product = await db.findProduct(Number(id));
   if (!product) {
     const categories = await db.getCategories();
     const products = await db.getProducts(req.query);
@@ -160,23 +172,89 @@ exports.deleteProductPost = async (req, res) => {
       errors: [{ msg: "Product not found" }],
     });
   }
-  res.redirect("/products");
+  res.render("confirmDelete", { item: product, type: "products" });
 };
 
-exports.deleteCategoryPost = async (req, res) => {
+exports.deleteProductPost = [
+  validatePassword,
+  async (req, res) => {
+    const errors = validationResult(req);
+    const { id } = req.params;
+    const product = await db.findProduct(Number(id));
+    if (!product) {
+      const categories = await db.getCategories();
+      const products = await db.getProducts(req.query);
+      return res.status(404).render("products", {
+        categories,
+        products,
+        errors: [{ msg: "Product not found" }],
+      });
+    }
+    if (!errors.isEmpty()) {
+      return res.status(404).render("confirmDelete", {
+        errors: errors.array(),
+        item: product,
+        type: "products",
+      });
+    }
+    const { password } = req.body || {};
+    if (password !== adminPass) {
+      return res.status(403).render("productDetail", {
+        product,
+        errors: [{ msg: "Incorrect password." }],
+      });
+    }
+    await db.deleteProduct(Number(id));
+    res.redirect("/products");
+  },
+];
+
+exports.deleteCategoryGet = async (req, res) => {
   const { id } = req.params;
-  try {
-    await db.deleteCategory(Number(id));
-    res.redirect("/categories");
-  } catch (err) {
+  const category = await db.findCategory(Number(id));
+  if (!category) {
     const categories = await db.getCategories();
-    res.render("categories", {
+    return res.status(404).render("categories", {
       categories,
-      errors: [
-        {
-          msg: "Cannot delete this category yet. Remove or reassign its products first.",
-        },
-      ],
+      errors: [{ msg: "Category not found" }],
     });
   }
+  res.render("confirmDelete", { item: category, type: "categories" });
 };
+
+exports.deleteCategoryPost = [
+  validatePassword,
+  async (req, res) => {
+    const { id } = req.params;
+    const categories = await db.getCategories();
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const category = await db.findCategory(Number(id));
+      return res.status(404).render("confirmDelete", {
+        errors: errors.array(),
+        item: category,
+        type: "categories",
+      });
+    }
+    const { password } = req.body || {};
+    if (password !== adminPass) {
+      return res.status(403).render("categories", {
+        categories,
+        errors: [{ msg: "Incorrect password." }],
+      });
+    }
+    try {
+      await db.deleteCategory(Number(id));
+      res.redirect("/categories");
+    } catch (err) {
+      res.render("categories", {
+        categories,
+        errors: [
+          {
+            msg: "Cannot delete this category yet. Remove or reassign its products first.",
+          },
+        ],
+      });
+    }
+  },
+];

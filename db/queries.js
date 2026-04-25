@@ -126,3 +126,12 @@ exports.findProduct = async (id) => {
   );
   return rows[0];
 };
+
+exports.findCategory = async (id) => {
+  const { rows } = await pool.query(
+    `SELECT * FROM categories c
+    WHERE c.id = $1`,
+    [id],
+  );
+  return rows[0];
+};

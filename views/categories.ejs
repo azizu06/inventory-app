@@ -49,9 +49,13 @@
               <i data-lucide="arrow-up-right" aria-hidden="true"></i>
             </span>
           </a>
-          <form action="/categories/<%= cat.id %>/delete" method="post">
-            <button type="submit" class="text-danger">Delete category</button>
-          </form>
+          <a
+            href="/categories/<%= cat.id %>/delete"
+            class="danger-link"
+            aria-label="Delete <%= cat.name %> category"
+          >
+            Delete category
+          </a>
         </article>
         <% }) %>
       </section>

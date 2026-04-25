@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <meta
+      name="description"
+      content="Confirm a protected TechCenter inventory deletion."
+    />
+    <title>Confirm deletion | TechCenter</title>
+  </head>
+  <body>
+    <%- include("navbar.ejs") %>
+    <main id="main-content" class="page-shell form-page">
+      <a href="/<%= type %>" class="back-link">
+        <i data-lucide="arrow-left" aria-hidden="true"></i>
+        Back to
+        <%= type %>
+      </a>
+
+      <section class="delete-layout">
+        <div class="form-intro">
+          <p class="eyebrow">Protected action</p>
+          <h1>Confirm deletion</h1>
+          <p>
+            This removes
+            <strong><%= item.name %></strong>
+            from the TechCenter catalog. Verify the admin password before
+            continuing.
+          </p>
+        </div>
+
+        <div class="delete-card">
+          <div class="delete-summary">
+            <span class="delete-icon" aria-hidden="true">
+              <i data-lucide="triangle-alert"></i>
+            </span>
+            <div>
+              <p class="micro-label">Ready to remove</p>
+              <h2><%= item.name %></h2>
+            </div>
+          </div>
+
+          <%- include("errors.ejs") %>
+
+          <form
+            action="/<%= type %>/<%= item.id %>/delete"
+            method="post"
+            class="stacked-form"
+          >
+            <div class="field-block">
+              <label for="password">Admin password</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                required
+                autocomplete="current-password"
+                placeholder="Enter password to confirm"
+              />
+              <p class="helper-text">
+                Deletion is locked behind admin confirmation.
+              </p>
+            </div>
+
+            <div class="form-actions">
+              <a href="/<%= type %>" class="btn btn-secondary">Cancel</a>
+              <button type="submit" class="btn btn-danger">
+                Confirm delete
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -59,3 +59,12 @@ exports.validateCategory = [
     .isLength({ max: 500 })
     .withMessage("Description must be a max of 500 characters."),
 ];
+
+exports.validatePassword = [
+  body("password")
+    .trim()
+    .notEmpty()
+    .withMessage("Password is required")
+    .isLength({ min: 1, max: 100 })
+    .withMessage("Password must be between 1 and 100 characters."),
+];

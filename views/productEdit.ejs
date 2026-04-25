@@ -98,6 +98,21 @@
               >
             </div>
 
+            <div class="field-block">
+              <label for="password">Admin password</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                required
+                autocomplete="current-password"
+                placeholder="Required to save inventory changes"
+              />
+              <p class="helper-text">
+                Enter the admin password before applying product updates.
+              </p>
+            </div>
+
             <div class="form-actions">
               <a href="/products/<%= product.id %>" class="btn btn-secondary"
                 >Cancel</a
