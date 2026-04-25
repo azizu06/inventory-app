@@ -25,16 +25,24 @@ exports.createProductPost = [
   validateCreateProduct,
   async (req, res) => {
     const errors = validationResult(req);
+    const categories = await db.getCategories();
     if (!errors.isEmpty()) {
-      const categories = await db.getCategories();
       return res.status(400).render("newProduct", {
         errors: errors.array(),
         product: req.body,
         categories,
       });
     }
-    await db.addProduct(req.body);
-    res.redirect("/products");
+    try {
+      await db.addProduct(req.body);
+      res.redirect("/products");
+    } catch (err) {
+      res.render("newProduct", {
+        errors: [{ msg: "A product with this name already exists." }],
+        product: req.body,
+        categories,
+      });
+    }
   },
 ];
 
@@ -56,8 +64,15 @@ exports.createCategoryPost = [
         .status(400)
         .render("newCategory", { errors: errors.array(), category: req.body });
     }
-    await db.addCategory(req.body);
-    res.redirect("/categories");
+    try {
+      await db.addCategory(req.body);
+      res.redirect("/categories");
+    } catch (err) {
+      res.render("newCategory", {
+        errors: [{ msg: "A category with this name already exists." }],
+        category: req.body,
+      });
+    }
   },
 ];
 
