@@ -13,7 +13,7 @@ exports.homeGet = async (req, res) => {
 exports.productsGet = async (req, res) => {
   const products = await db.getProducts(req.query);
   const categories = await db.getCategories();
-  res.render("products", { categories, products });
+  res.render("products", { categories, products, filter: req.query });
 };
 
 exports.createProductsGet = async (req, res) => {

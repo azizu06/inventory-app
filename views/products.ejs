@@ -34,30 +34,28 @@
 
       <section class="catalog-layout">
         <aside class="filter-panel" aria-label="Product filters">
-          <form method="get" action="/products">
+          <form method="get" action="/products" class="filter-scroll-area">
             <div class="filter-header">
               <span>Refine catalog</span>
               <a href="/products">Reset</a>
             </div>
 
-            <div class="field-block">
-              <label for="catalog-search">Search</label>
-              <input
-                id="catalog-search"
-                type="text"
-                name="search"
-                placeholder="Product name"
-              />
-            </div>
-
             <fieldset class="option-group">
               <legend>Price order</legend>
               <label class="choice-chip">
+                <% if (filter.price === "asc") { %>
+                <input type="radio" name="price" value="asc" checked />
+                <% } else { %>
                 <input type="radio" name="price" value="asc" />
+                <% } %>
                 <span>Lowest first</span>
               </label>
               <label class="choice-chip">
+                <% if (filter.price === "desc") { %>
+                <input type="radio" name="price" value="desc" checked />
+                <% } else { %>
                 <input type="radio" name="price" value="desc" />
+                <% } %>
                 <span>Highest first</span>
               </label>
             </fieldset>
@@ -65,11 +63,19 @@
             <fieldset class="option-group">
               <legend>Name order</legend>
               <label class="choice-chip">
+                <% if (filter.name === "asc") { %>
+                <input type="radio" name="name" value="asc" checked />
+                <% } else { %>
                 <input type="radio" name="name" value="asc" />
+                <% } %>
                 <span>A to Z</span>
               </label>
               <label class="choice-chip">
+                <% if (filter.name === "desc") { %>
+                <input type="radio" name="name" value="desc" checked />
+                <% } else { %>
                 <input type="radio" name="name" value="desc" />
+                <% } %>
                 <span>Z to A</span>
               </label>
             </fieldset>
@@ -79,11 +85,23 @@
               <% const safeCategories = typeof categories !== "undefined" ? categories : []; %>
               <% safeCategories.forEach((cat) => { %>
               <label class="choice-chip">
+                <% const selectedCategories = Array.isArray(filter.category_id)
+                ? filter.category_id : filter.category_id ? [filter.category_id]
+                : []; %> <% if (selectedCategories.map(Number).includes(cat.id))
+                { %>
+                <input
+                  type="checkbox"
+                  name="category_id"
+                  value="<%= cat.id %>"
+                  checked
+                />
+                <% } else { %>
                 <input
                   type="checkbox"
                   name="category_id"
                   value="<%= cat.id %>"
                 />
+                <% } %>
                 <span><%= cat.name %></span>
               </label>
               <% }) %>
