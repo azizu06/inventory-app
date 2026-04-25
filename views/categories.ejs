@@ -15,11 +15,12 @@
           >Add a category</a
         >
       </div>
+      <%- include("errors.ejs") %>
       <div class="flex flex-wrap max-w-lg gap-3">
         <% categories.forEach((cat) => %>
         <a
           class="flex flex-col gap-2 justify-center"
-          href="/products?category=<%= cat.name %>"
+          href="/products?category_id=<%= cat.id %>"
         >
           <h2 class="justify-center"><%= cat.name %></h2>
           <p><%= cat.description %></p>

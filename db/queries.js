@@ -6,7 +6,7 @@ exports.getCategories = async () => {
 };
 
 exports.getProducts = async (filters) => {
-  const { search, categories, name, price } = filters;
+  const { search, category_id, name, price } = filters;
   let sql = `
     SELECT p.*, c.name as category
     FROM products p
@@ -20,9 +20,11 @@ exports.getProducts = async (filters) => {
     conditions.push(`p.name ILIKE $${values.length}`);
   }
 
-  if (categories && categories.length > 0) {
-    values.push(categories);
-    conditions.push(`c.name = ANY($${values.length})`);
+  if (category_id && category_id.length > 0) {
+    let categoryIds = category_id;
+    if (!Array.isArray(category_id)) categoryIds = [category_id];
+    values.push(categoryIds);
+    conditions.push(`p.category_id = ANY($${values.length})`);
   }
   if (conditions.length > 0) {
     sql += ` WHERE ${conditions.join(" AND ")}`;
